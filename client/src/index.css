@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap');
+
+
+@font-face {
+  font-family: 'integral Cf';
+  src: url('./fonts/Demo_Fonts/Fontspring-DEMO-integralcf-extrabold.otf') format('truetype');
+  /* Add other font formats (woff, woff2, etc.) for cross-browser compatibility */
+}
+@font-face {
+  font-family: 'satoshi';
+  src: url('./fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf') format('truetype');
+  /* Add other font formats (woff, woff2, etc.) for cross-browser compatibility */
+}
+@font-face {
+  font-family: 'satoshi-md';
+  src: url('./fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Medium.otf') format('truetype');
+  /* Add other font formats (woff, woff2, etc.) for cross-browser compatibility */
+}
+@font-face {
+  font-family: 'satoshi-bold';
+  src: url('./fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Bold.otf') format('truetype');
+  /* Add other font formats (woff, woff2, etc.) for cross-browser compatibility */
+}
+
+
+
+body h1{
+    font-family: 'integral Cf' , sans-serif;
+}
+
+body p{
+    font-family: 'satoshi' , sans-serif;
+}
+
+.navlinks li {
+    border-top: 1px solid rgba(218, 218, 218, 0.562);
+    cursor: pointer;
+
+}
+
+.slick-arrow
+ {
+  display: none !important;
+}
+
+.top{
+  position: relative;
+}
+
+.top img{
+ 
+  object-fit: cover;
+  border-radius: 10px;
+ 
+}
+
+.top .title{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+
+}
+
+.footer{
+   background: linear-gradient(360deg, #F0F0F0 85%, #FFFEFE 85%)
+}
+
+.links div ul li {
+  opacity: .6;
+  font-size: 14px;
+  padding: 5px 0;
+  cursor: pointer;
+ 
+}
+.links div ul  {
+ margin-top: 10px;
+ 
+}
+.links div {
+  width: 160px;
+  margin-top: 20px;
+}
