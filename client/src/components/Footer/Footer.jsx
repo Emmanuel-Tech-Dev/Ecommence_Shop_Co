@@ -31,7 +31,7 @@ const Footer = () => {
         </div>
         <div className="md:flex md:items-center md:gap-x-6 md:mt-12">
           <div className="div mt-10">
-            <img src="./image/logo.png" />
+            <img src="../image/logo.png" />
             <p className="opacity-[.6] py-3 md:w-[50%]">
               We have clothes that suits your style and which you're proud to
               wear. From woment to men
@@ -94,11 +94,11 @@ const Footer = () => {
           <div className="div opacity-[.6] text-center mt-8 text-[14px] md:flex md:items-center md:justify-between">
             <p>Shop.co © 2000-2023, All Rights Reserved</p>
             <div className='flex justify-center items-center mt-3 mb-5 md:mt-0 md:mb-0'>
-              <img src='./image/Badge.png'/>
-              <img src='./image/Badge-1.png'/>
-              <img src='./image/Badge-2.png'/>
-              <img src='./image/Badge-3.png'/>
-              <img src='./image/Badge-4.png'/>
+              <img src='../image/Badge.png'/>
+              <img src='../image/Badge-1.png'/>
+              <img src='../image/Badge-2.png'/>
+              <img src='../image/Badge-3.png'/>
+              <img src='../image/Badge-4.png'/>
             </div>
           </div>
        

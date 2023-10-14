@@ -6,6 +6,7 @@ import {
   AiFillInstagram,
   AiOutlineTwitter,
 } from 'react-icons/ai';
+import {Link} from 'react-router-dom'
 const Navbar = () => {
 
   const [navOpen , setNavOpen] = useState(false)
@@ -31,12 +32,14 @@ const Navbar = () => {
               <AiOutlineClose onClick={handleNavOpen} size={24} />
             )}
           </div>
-
-          <img
-            src="./image/logo.png"
+<Link to={'/'}>
+   <img
+            src="../image/logo.png"
             alt="logo"
             className="w-[160px] h-[22px]"
           />
+</Link>
+       
           <div>
             <ul className=" hidden md:block md:flex  font-satoshi">
               <li className=" cursor-pointer  py-4 px-4 hover:bg-gray-100 transition-all duration-300 ease-in-out">

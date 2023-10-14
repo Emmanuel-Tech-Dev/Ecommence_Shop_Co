@@ -1,10 +1,9 @@
-import React from 'react'
 import Card from '../Cards/Card'
 import { data } from '../../Data'
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
+import { Link } from 'react-router-dom';
 
 
 const Product = ({title}) => {
@@ -61,9 +60,7 @@ const Product = ({title}) => {
         ))}
       </Slider>
 
-      <button className="w-full text-center mt-10 border py-4 rounded-[62px] mx-auto md:w-[210px] md:flex md:items-center md:justify-center md:text-center">
-        View All
-      </button>
+     
     </div>
   );
 }

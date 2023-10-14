@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const Hero = () => {
   return (
     <div>
@@ -13,9 +13,12 @@ const Hero = () => {
             designed to bring out your individual and cater to your sense of
             style{' '}
           </p>
-          <button className="text-center w-[100%] py-4 bg-black rounded-[62px] text-white md:w-[210px]">
+<Link to={'categories/1'}> 
+<button className="text-center w-[100%] py-4 bg-black rounded-[62px] text-white md:w-[210px]">
             Shop Now
           </button>
+</Link>
+         
           <div className="stats flex flex-wrap mt-4 justify-center items-center w-[100%] mx-auto gap-y-5 md:mt-8 md:justify-start">
             <div className="f  px-8 font-satoshi-bold md:pl-[]">
               <h2 className="text-[30px] font-bold ">200+</h2>

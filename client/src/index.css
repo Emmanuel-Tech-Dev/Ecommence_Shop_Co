@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap');
-
 
 @font-face {
   font-family: 'integral Cf';
@@ -84,4 +82,10 @@ body p{
 .links div {
   width: 160px;
   margin-top: 20px;
+}
+.colors div{
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+ 
 }
