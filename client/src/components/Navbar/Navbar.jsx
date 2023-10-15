@@ -67,7 +67,10 @@ const Navbar = () => {
             />
           </div>
           <FiSearch size={24} className="block md:hidden" />
+         <Link to={'/cart'}>
           <FiShoppingCart size={24} />
+         </Link>
+         
           <FiUser size={24} />
         </div>
       </nav>

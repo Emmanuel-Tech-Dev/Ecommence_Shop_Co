@@ -63,7 +63,7 @@ function App() {
            element: <Product />,
          },
          {
-           path: '/mycart',
+           path: '/cart',
            element: <Cart />,
          },
         
