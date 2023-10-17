@@ -7,14 +7,20 @@ import {
   AiOutlineTwitter,
 } from 'react-icons/ai';
 import {Link} from 'react-router-dom'
+import ProfileModal from '../Modals/ProfileModal';
 const Navbar = () => {
 
   const [navOpen , setNavOpen] = useState(false)
-
+  const [modalOpen , setModalOpen] = useState(false)
 
   const handleNavOpen = () => {
     setNavOpen(!navOpen)
   }
+  
+  const handleModalOpen = () => {
+    setModalOpen(!modalOpen)
+  }
+
 
 
   return (
@@ -71,7 +77,7 @@ const Navbar = () => {
           <FiShoppingCart size={24} />
          </Link>
          
-          <FiUser size={24} />
+          <FiUser size={24} onClick={handleModalOpen} className='cursor-pointer'/>
         </div>
       </nav>
 
@@ -117,6 +123,8 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
+      {modalOpen &&  <ProfileModal/>}
     </div>
   );
 }

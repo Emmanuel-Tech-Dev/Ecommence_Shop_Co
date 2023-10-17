@@ -3,16 +3,34 @@ import { AiOutlineCheck, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { VscSettings } from 'react-icons/vsc';
 import Products from '../../components/Products/Products';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Product = () => {
   const [quantity, setQuantity] = useState(1);
+  const [activeImage, setActiveImage] = useState('image');
+
+  const [checkedColor, setCheckedColor] = useState('#4F4631');
+
+  const [checkedSize, setCheckedSize] = useState('medium');
+
+  const toggleColor = (color) => {
+    setCheckedColor(color === checkedColor ? null : color);
+  };
+
+  const toggleSize = (size) => {
+    setCheckedSize(size === checkedSize ? null : size);
+  };
 
   return (
     <>
       <div className="px-4 md:px-20">
         <hr className="mb-4" />
         <div className="links flex gap-x-2 items-center mb-5 text-[14px] ">
+         <Link to={'/'}>
           <h5 className="opacity-[.6] cursor-pointer">Home</h5>
+         </Link>
+
+         
           <RxCaretRight />
           <h5 className="opacity-[.6] cursor-pointer">Shop</h5>
           <RxCaretRight />
@@ -22,21 +40,36 @@ const Product = () => {
           <div className="md:flex md:items-center md:justify-between md:gap-10 md:mb-8">
             <div className="flex flex-col gap-5 md:flex-row-reverse md:w-[50%]">
               <img
-                src="../image/image.png"
+                src={`../image/${activeImage}.png`}
                 className="w-full h-[400px] md:h-[500px] object-cover rounded-[20px]"
               />
               <div className="flex justify-between md:flex-col">
                 <img
-                  src="../image/image.png"
-                  className="w-[110px] h-[110px] object-cover rounded-[20px] border border-black"
+                  src={'../image/image 8.png'}
+                  className={
+                    activeImage === 'image 8'
+                      ? 'w-[110px] h-[110px] object-cover rounded-[20px] border border-black'
+                      : 'w-[110px] h-[110px] object-cover rounded-[20px] '
+                  }
+                  onClick={() => setActiveImage('image 8')}
                 />
                 <img
-                  src="../image/image.png"
-                  className="w-[110px] h-[110px] object-cover rounded-[20px]"
+                  src="../image/image 7.png"
+                  className={
+                    activeImage === 'image 7'
+                      ? 'w-[110px] h-[110px] object-cover rounded-[20px] border border-black'
+                      : 'w-[110px] h-[110px] object-cover rounded-[20px] '
+                  }
+                  onClick={() => setActiveImage('image 7')}
                 />
                 <img
-                  src="../image/image.png"
-                  className="w-[110px] h-[110px] object-cover rounded-[20px]"
+                  src="../image/image 9.png"
+                  className={
+                    activeImage === 'image 9'
+                      ? 'w-[110px] h-[110px] object-cover rounded-[20px] border border-black'
+                      : 'w-[110px] h-[110px] object-cover rounded-[20px] '
+                  }
+                  onClick={() => setActiveImage('image 9')}
                 />
               </div>
             </div>
@@ -70,11 +103,36 @@ const Product = () => {
                   Select Colors
                 </h4>
                 <div className="colors flex gap-2 mt-3">
-                  <div className="bg-[#4F4631] flex justify-center items-center">
-                    <AiOutlineCheck color="white" />
+                  <div
+                    className={`bg-[#4F4631] flex justify-center items-center ${
+                      checkedColor === '#4F4631' ? '' : 'checked'
+                    }`}
+                    onClick={() => toggleColor('#4F4631')}
+                  >
+                    {checkedColor === '#4F4631' && (
+                      <AiOutlineCheck color="white" />
+                    )}
                   </div>
-                  <div className="bg-[#314F4A]"></div>
-                  <div className="bg-[#31344F]"></div>
+                  <div
+                    className={`bg-[#314F4A] flex justify-center items-center  ${
+                      checkedColor === '#314F4A' ? 'checked' : ''
+                    }`}
+                    onClick={() => toggleColor('#314F4A')}
+                  >
+                    {checkedColor === '#314F4A' && (
+                      <AiOutlineCheck color="white" />
+                    )}
+                  </div>
+                  <div
+                    className={`bg-[#31344F] flex justify-center items-center ${
+                      checkedColor === '#31344F' ? 'checked' : ''
+                    }`}
+                    onClick={() => toggleColor('#31344F')}
+                  >
+                    {checkedColor === '#31344F' && (
+                      <AiOutlineCheck color="white" />
+                    )}
+                  </div>
                 </div>
               </div>
               <hr />
@@ -83,23 +141,50 @@ const Product = () => {
                   Choose Size
                 </h4>
                 <div className="flex gap-2 mt-3 font-satoshi">
-                  <div className="bg-[#F0F0F0] py-2 px-5 rounded-[62px]">
+                  <div
+                    className={`bg-[#F0F0F0] py-2 px-5 rounded-[62px] cursor-pointer ${
+                      checkedSize === 'small'
+                        ? 'checked bg-black text-white'
+                        : ''
+                    }`}
+                    onClick={() => toggleSize('small')}
+                  >
                     <span className="text-[14px] opacity-[.6]">Small</span>
                   </div>
-                  <div className="bg-[#F0F0F0] py-2 px-5 rounded-[62px]">
+                  <div
+                    className={`bg-[#F0F0F0] py-2 px-5 rounded-[62px] cursor-pointer ${
+                      checkedSize === 'medium'
+                        ? 'checked bg-black text-white'
+                        : ''
+                    }`}
+                    onClick={() => toggleSize('medium')}
+                  >
                     <span className="text-[14px] opacity-[.6]">Medium</span>
                   </div>
-                  <div className="bg-[#F0F0F0] py-2 px-5 rounded-[62px]">
+                  <div
+                    className={`bg-[#F0F0F0] py-2 px-5 rounded-[62px] cursor-pointer ${
+                      checkedSize === 'large'
+                        ? 'checked bg-black text-white'
+                        : ''
+                    }`}
+                    onClick={() => toggleSize('large')}
+                  >
                     <span className="text-[14px] opacity-[.6]">Large</span>
                   </div>
-                  <div className="bg-[#F0F0F0] py-2 px-5 rounded-[62px]">
+                  <div
+                    className={`bg-[#F0F0F0] py-2 px-5 rounded-[62px] cursor-pointer ${
+                      checkedSize === 'xlarge'
+                        ? 'checked bg-black text-white'
+                        : ''
+                    }`}
+                    onClick={() => toggleSize('xlarge')}
+                  >
                     <span className="text-[14px] opacity-[.6]">X-Large</span>
                   </div>
                 </div>
               </div>
               <hr />
               <div className="my-5">
-             
                 <div className=" flex gap-5 mt-3">
                   <div className="bg-[#F0F0F0] py-3 px-4  flex items-center gap-4 rounded-[62px] ">
                     <AiOutlineMinus

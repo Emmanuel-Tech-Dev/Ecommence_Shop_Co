@@ -18,14 +18,14 @@ const Cart = () => {
       </div>
       <h1 className="text-[32px] md:text-[40px]">My Cart</h1>
       <div className="container flex flex-col items-start md:flex-row md:justify-between md:gap-5">
-        <div className="my-5 border p-3 rounded-[20px] md:w-[70%]">
+        <div className="my-5 w-full border p-3 rounded-[20px] md:w-[70%]">
           <CartCards />
           <hr className="my-3" />
           <CartCards />
           <hr className="my-3" />
           <CartCards />
         </div>
-        <div className="my-5 border p-3 rounded-[20px]">
+        <div className="my-5 border p-3 rounded-[20px] w-full md:w-[30%]">
           <h2 className="font-satoshi-bold text-[20px] md:text-[24px]">Order Summary</h2>
           <div className="details mt-4">
             <div className="sub flex items-center justify-between">

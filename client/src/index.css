@@ -90,3 +90,6 @@ body p{
  
 }
 
+.modal {
+   box-shadow: 3px 4px 20px rgba(124.31, 124.31, 124.31, 0.25)
+}
