@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { RxCaretRight } from 'react-icons/rx';
 import { AiOutlineCheck, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { VscSettings } from 'react-icons/vsc';

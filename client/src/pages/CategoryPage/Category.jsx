@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { RxCaretRight } from 'react-icons/rx';
 import { VscSettings } from 'react-icons/vsc';
 
@@ -33,7 +33,7 @@ const Category = () => {
           <div className="w-[35px] h-[35px] rounded-[50px] bg-[#f0f0f0] flex items-center justify-center"
           onClick={handleOpen}
           >
-            <VscSettings />
+            <VscSettings className='cursor-pointer'/>
           </div>
         </div>
 
@@ -64,7 +64,7 @@ const Category = () => {
           </div>
         </div>
       </div>
-      {openModal && <FilterModal isOpen={openModal} />}
+     <FilterModal isOpen={openModal} setOpenModal={setOpenModal} />
     </>
   );
 };

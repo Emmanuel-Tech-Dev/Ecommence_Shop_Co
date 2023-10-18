@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 import { FiMenu, FiSearch, FiShoppingCart, FiUser } from 'react-icons/fi';
 import {
   AiOutlineClose,
@@ -6,22 +6,21 @@ import {
   AiFillInstagram,
   AiOutlineTwitter,
 } from 'react-icons/ai';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import ProfileModal from '../Modals/ProfileModal';
-const Navbar = () => {
 
-  const [navOpen , setNavOpen] = useState(false)
-  const [modalOpen , setModalOpen] = useState(false)
+
+const Navbar = () => {
+  const [navOpen, setNavOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleNavOpen = () => {
-    setNavOpen(!navOpen)
-  }
-  
+    setNavOpen(!navOpen);
+  };
+
   const handleModalOpen = () => {
-    setModalOpen(!modalOpen)
-  }
-
-
+    setModalOpen(!modalOpen);
+  };
 
   return (
     <div>
@@ -38,14 +37,14 @@ const Navbar = () => {
               <AiOutlineClose onClick={handleNavOpen} size={24} />
             )}
           </div>
-<Link to={'/'}>
-   <img
-            src="../image/logo.png"
-            alt="logo"
-            className="w-[160px] h-[22px]"
-          />
-</Link>
-       
+          <Link to={'/'}>
+            <img
+              src="../image/logo.png"
+              alt="logo"
+              className="w-[160px] h-[22px]"
+            />
+          </Link>
+
           <div>
             <ul className=" hidden md:block md:flex  font-satoshi">
               <li className=" cursor-pointer  py-4 px-4 hover:bg-gray-100 transition-all duration-300 ease-in-out">
@@ -73,11 +72,15 @@ const Navbar = () => {
             />
           </div>
           <FiSearch size={24} className="block md:hidden" />
-         <Link to={'/cart'}>
-          <FiShoppingCart size={24} />
-         </Link>
-         
-          <FiUser size={24} onClick={handleModalOpen} className='cursor-pointer'/>
+          <Link to={'/cart'}>
+            <FiShoppingCart size={24} />
+          </Link>
+
+          <FiUser
+            size={24}
+            onClick={handleModalOpen}
+            className="cursor-pointer"
+          />
         </div>
       </nav>
 
@@ -124,9 +127,9 @@ const Navbar = () => {
         </div>
       </div>
 
-      {modalOpen &&  <ProfileModal/>}
+      <ProfileModal modalOpen={modalOpen} />
     </div>
   );
-}
+};
 
-export default Navbar
+export default Navbar;
