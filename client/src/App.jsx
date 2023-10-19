@@ -13,8 +13,11 @@ import Cart from './pages/Cart/Cart'
 
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+import Login from './pages/LogIn/Login';
+import SignUp from './pages/SignUp/SignUp';
 
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
  
@@ -68,6 +71,13 @@ function App() {
            path: '/cart',
            element: <Cart />,
          },
+         {path : '/login' , 
+          element : <Login/>
+        },
+        {
+          path : '/signup',
+          element: <SignUp/>
+        }
         
        ],
      },
@@ -79,6 +89,18 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer
+      
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

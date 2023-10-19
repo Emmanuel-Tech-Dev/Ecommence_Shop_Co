@@ -5,7 +5,7 @@ const BoxCards = ({item}) => {
   return (
     <>
       <Link to={'/product/1'}>
-        <img src={item.img} className="rounded-[14px] w-[200px] h-[200px]" />
+        <img src={item.img} className="rounded-[14px] w-[160px] h-[160px]" />
         <h3 className="text-[16px] font-satoshi-bold mt-2">{item.name.slice(0 , 20)}...</h3>
         <div className="ratings flex items-center gap-5 my-2">
           <img src="../image/ratings.png" className='h-[15px]' />
@@ -18,3 +18,4 @@ const BoxCards = ({item}) => {
 }
 
 export default BoxCards
+ 

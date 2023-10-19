@@ -22,7 +22,7 @@ const toggleColor = (color) => {
         isOpen ? 'translate-y-0' : 'translate-y-full'
       }`}
     >
-      <div className="filters bg-white  h-[85dvh] absolute w-full bottom-0 rounded-tl-[20px] rounded-tr-[20px] px-4 overflow-y-scroll">
+      <div className="filters bg-white  h-[100dvh] pb-[50px] absolute w-full top-[10%] bottom-0  rounded-tl-[20px] rounded-tr-[20px] px-4 overflow-y-scroll">
         {/* Content inside the white div */}
         <div className="content py-4">
           <div className="head sticky top-0  py-4 bg-white z-[3]">

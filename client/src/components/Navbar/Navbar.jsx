@@ -28,7 +28,10 @@ const Navbar = () => {
         Sign up and get 20% off to your first order.{' '}
         <span className="underline">Sign Up Now</span>
       </div>
-      <nav className="px-4 flex justify-between items-center  h-[10vh] md:px-20">
+      <nav
+        className="px-4 flex justify-between items-center  h-[10vh] md:px-20"
+       
+      >
         <div className="left flex items-center gap-x-4 ">
           <div className="block md:hidden">
             {!navOpen ? (
@@ -90,12 +93,16 @@ const Navbar = () => {
             ? 'div h-[85vh] bg-black/50 absolute w-[100%] z-[999] left-[-100%]  transition-all duration-300 ease-in-out'
             : 'div h-[85vh] bg-black/50 absolute w-[100%] left-[0] z-[999] transition-all duration-300 ease-in-out'
         }
+        onClick={() => setNavOpen(false)}
       >
         <div className="do w-[80%]  h-[100%] bg-white">
           <ul className="navlinks font-satoshi">
-            <li className=" py-4 px-4 hover:bg-gray-100 transition-all duration-300 ease-in-out">
-              Shop
-            </li>
+            <Link to={'/categories/1'}>
+              <li className=" py-4 px-4 hover:bg-gray-100 transition-all duration-300 ease-in-out">
+                Shop
+              </li>
+            </Link>
+
             <li className="py-4 px-4 hover:bg-gray-100 transition-all duration-300 ease-in-out">
               On Sale
             </li>
@@ -127,7 +134,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <ProfileModal modalOpen={modalOpen} />
+      <ProfileModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </div>
   );
 };
