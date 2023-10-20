@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FiMenu, FiSearch, FiShoppingCart, FiUser } from 'react-icons/fi';
 import {
   AiOutlineClose,
@@ -8,11 +8,14 @@ import {
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import ProfileModal from '../Modals/ProfileModal';
+import { UserContext } from '../../UserContext';
 
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+
+  const {userData} = useContext(UserContext)
 
   const handleNavOpen = () => {
     setNavOpen(!navOpen);
@@ -28,10 +31,7 @@ const Navbar = () => {
         Sign up and get 20% off to your first order.{' '}
         <span className="underline">Sign Up Now</span>
       </div>
-      <nav
-        className="px-4 flex justify-between items-center  h-[10vh] md:px-20"
-       
-      >
+      <nav className="px-4 flex justify-between items-center  h-[10vh] md:px-20">
         <div className="left flex items-center gap-x-4 ">
           <div className="block md:hidden">
             {!navOpen ? (
@@ -78,12 +78,22 @@ const Navbar = () => {
           <Link to={'/cart'}>
             <FiShoppingCart size={24} />
           </Link>
-
-          <FiUser
-            size={24}
-            onClick={handleModalOpen}
-            className="cursor-pointer"
-          />
+          {userData ? (
+            <div
+              className="colors rounded-[50px] bg-red-500"
+              onClick={handleModalOpen}
+            >
+              <div></div>
+            </div>
+          ) : (
+            <>
+              <FiUser
+                size={24}
+                onClick={handleModalOpen}
+                className="cursor-pointer"
+              />
+            </>
+          )}
         </div>
       </nav>
 

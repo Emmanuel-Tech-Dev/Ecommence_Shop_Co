@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FiMail, FiLock } from 'react-icons/fi';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
@@ -22,7 +22,7 @@ const Login = () => {
         // Signed up
         const user = userCredential.user;
         setUserData(user)
-         console.log(user)
+         
         toast.success('Login successfull');
         navigate('/');
         // ...
@@ -34,6 +34,11 @@ const Login = () => {
       });
   };
 
+
+  useEffect(() => {
+
+console.log(userData);
+  } , [userData])
 
 
   return (

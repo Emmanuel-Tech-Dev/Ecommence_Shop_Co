@@ -18,8 +18,8 @@ const SignUp = () => {
 
     if (password !== cPassword) {
       toast.error('Password does not match ');
-    }
-    createUserWithEmailAndPassword(auth, email, password)
+    }else{
+      createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
@@ -34,6 +34,8 @@ const SignUp = () => {
         toast.error(error.message.replace('Firebase:', ''));
         // ..
       });
+    }
+    
   };
 
   return (
