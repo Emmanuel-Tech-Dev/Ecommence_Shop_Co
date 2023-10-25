@@ -37,7 +37,7 @@ const Category = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-10 mt-10">
+        <div className="flex flex-wrap items-center justify-between gap-7 mt-10">
           {data.map((item) => (
             <BoxCards item={item} key={item.name} />
           ))}

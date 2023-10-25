@@ -4,9 +4,9 @@ import { AiOutlineClose, AiOutlineCheck } from 'react-icons/ai';
 // eslint-disable-next-line react/prop-types
 const FilterModal = ({ isOpen, setOpenModal }) => {
 
- const [checkedColor, setCheckedColor] = useState('#063AF5');
+ const [checkedColor, setCheckedColor] = useState('');
 
-  const [checkedSize, setCheckedSize] = useState('medium');
+  const [checkedSize, setCheckedSize] = useState('');
 
   const toggleSize = (size) => {
     setCheckedSize(size === checkedSize ? null : size);

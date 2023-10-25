@@ -30,13 +30,13 @@ const ProfileModal = ({modalOpen , setModalOpen}) => {
     <div
       className={
         !modalOpen
-          ? 'modal absolute right-4 bg-white p-6 rounded-[12px] hidden opacity-0 z-[2] transition-all duration-200 ease-in-out'
-          : ' modal absolute right-4 bg-white p-6 rounded-[12px] z-[2] opacity-100 block transition-all duration-200 ease-in-out'
+          ? 'modal absolute right-4 bg-white w-[180px] p-6 rounded-[12px] hidden opacity-0 z-[2] transition-all duration-200 ease-in-out'
+          : ' modal absolute right-4 bg-white w-[180px] p-6 rounded-[12px] z-[2] opacity-100 block transition-all duration-200 ease-in-out'
       }
     >
       {userData ? (
         <>
-          <h2 className="font-satoshi-bold text-[16px]">My Profile</h2>
+          <h2 className="font-satoshi-bold text-[16px]">{userData?.displayName}</h2>
           <hr className="mt-3" />
           <ul className="mt-5 text-[14px] flex flex-col gap-3">
             <Link to={'/signup'} onClick={() => setModalOpen(false)}>

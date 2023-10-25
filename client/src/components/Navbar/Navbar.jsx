@@ -80,10 +80,10 @@ const Navbar = () => {
           </Link>
           {userData ? (
             <div
-              className="colors rounded-[50px] bg-red-500"
+              className="colors rounded-[50px] border bg-[#f0f0f0]"
               onClick={handleModalOpen}
             >
-              <div></div>
+              <div className="flex items-center justify-center font-satoshi-md">{userData?.displayName[0]}</div>
             </div>
           ) : (
             <>
