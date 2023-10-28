@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FiMenu, FiSearch, FiShoppingCart, FiUser } from 'react-icons/fi';
 import {
   AiOutlineClose,
@@ -9,13 +9,30 @@ import {
 import { Link } from 'react-router-dom';
 import ProfileModal from '../Modals/ProfileModal';
 import { UserContext } from '../../UserContext';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../firebase/config';
 
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const {userData} = useContext(UserContext)
+  const {userData , setUserData} = useContext(UserContext)
+
+  useEffect(() => {
+
+      onAuthStateChanged(auth, (user) => {
+    if (user) {
+  setUserData(user)
+    } else {
+      setUserData('')
+    }
+  });
+  } , [])
+
+
+
+
 
   const handleNavOpen = () => {
     setNavOpen(!navOpen);
@@ -69,7 +86,7 @@ const Navbar = () => {
           <div className="bg-[#F0F0F0] rounded-[62px] hidden px-4 gap-5 md:w-[700px] md:flex md:items-center">
             <FiSearch className="opacity-[.4] text-black" size={24} />
             <input
-              type="email"
+              type="text"
               placeholder="Search for products..."
               className="bg-transparent py-3 w-full text-black focus:outline-none"
             />
@@ -80,10 +97,13 @@ const Navbar = () => {
           </Link>
           {userData ? (
             <div
-              className="colors rounded-[50px] border bg-[#f0f0f0]"
+              className="colors rounded-[50px] border border-[#5daf5d] bg-[#e7f8e7] cursor-pointer"
               onClick={handleModalOpen}
             >
-              <div className="flex items-center justify-center font-satoshi-md">{userData?.displayName[0]}</div>
+              <div className="flex items-center justify-center font-satoshi-md">
+                {' '}
+                {userData?.displayName ? userData.displayName[0] : ''}
+              </div>
             </div>
           ) : (
             <>

@@ -18,6 +18,7 @@ import SignUp from './pages/SignUp/SignUp';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PasswordReset from './pages/PassReset/PasswordReset';
 
 function App() {
  
@@ -77,6 +78,10 @@ function App() {
         {
           path : '/signup',
           element: <SignUp/>
+        },
+        {
+          path : '/password_reset',
+          element: <PasswordReset/>
         }
         
        ],
