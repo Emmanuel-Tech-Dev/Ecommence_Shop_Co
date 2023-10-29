@@ -12,27 +12,34 @@ import { UserContext } from '../../UserContext';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase/config';
 
+import { useDispatch } from 'react-redux';
+
+import { SET_ACTIVE_USER } from '../../redux/slice/authSlice';
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const {userData , setUserData} = useContext(UserContext)
+  const { userData, setUserData } = useContext(UserContext);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserData(user);
+       
+     dispatch(SET_ACTIVE_USER({
+        email : user.email,
+        userName : user.displayName,
+         userId: user.uid,
+     }))
 
-      onAuthStateChanged(auth, (user) => {
-    if (user) {
-  setUserData(user)
-    } else {
-      setUserData('')
-    }
-  });
-  } , [])
-
-
-
-
+      } else {
+        setUserData('');
+      }
+    });
+  }, []);
 
   const handleNavOpen = () => {
     setNavOpen(!navOpen);
