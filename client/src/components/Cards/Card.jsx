@@ -1,9 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 const Card = ({item}) => {
+
+ 
+
+
   return (
     <div>
-      <Link to={'/product/1'}> 
+      <Link to={`/product/${item.id}`}> 
       <img src={item.img} className="rounded-[14px] w-[250px] h-[250px]" />
       <h3 className="text-[20px] font-satoshi-bold mt-4">{item.name}</h3>
       <div className="ratings flex items-center gap-5 my-2">

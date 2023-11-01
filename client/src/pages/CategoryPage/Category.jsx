@@ -39,7 +39,7 @@ const Category = () => {
 
         <div className="flex flex-wrap items-center justify-between gap-7 mt-10">
           {data.map((item) => (
-            <BoxCards item={item} key={item.name} />
+            <BoxCards item={item} key={item.id} />
           ))}
         </div>
         <hr className="my-5" />

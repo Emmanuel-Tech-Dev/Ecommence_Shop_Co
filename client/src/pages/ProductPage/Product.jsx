@@ -4,9 +4,20 @@ import { AiOutlineCheck, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { VscSettings } from 'react-icons/vsc';
 import Products from '../../components/Products/Products';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/cartReducer';
+import { data } from '../../Data';
 
 const Product = () => {
+
+     const iNum = useParams().id;
+
+     console.log(iNum);
+
+
+  const dispatch = useDispatch()
+
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState('image');
 
@@ -21,6 +32,19 @@ const Product = () => {
   const toggleSize = (size) => {
     setCheckedSize(size === checkedSize ? null : size);
   };
+
+  const handleAddToCart = () => {
+     dispatch(
+       addToCart({
+         id: data.iNum,
+         name: data.name,
+         price: data.price,
+         image: data.img,
+         quantity,
+       })
+     );
+  }
+
 
   return (
     <>
@@ -41,7 +65,7 @@ const Product = () => {
           <div className="md:flex md:items-center md:justify-between md:gap-10 md:mb-8">
             <div className="flex flex-col gap-5 md:flex-row-reverse md:w-[50%]">
               <img
-                src={`../image/${activeImage}.png`}
+                src={data.img}
                 className="w-full h-[400px] md:h-[500px] object-cover rounded-[20px]"
               />
               <div className="flex justify-between md:flex-col">
@@ -204,7 +228,9 @@ const Product = () => {
                       onClick={() => setQuantity((prev) => prev + 1)}
                     />
                   </div>
-                  <button className="bg-[#000000] text-white w-full rounded-[62px]">
+                  <button
+                  onClick={handleAddToCart()}
+                  className="bg-[#000000] text-white w-full rounded-[62px]">
                     Add to Cart
                   </button>
                 </div>

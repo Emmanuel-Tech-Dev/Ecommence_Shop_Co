@@ -3,10 +3,12 @@ import { data } from '../../Data'
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 
 const Product = ({title}) => {
+
+
 
     const settings = {
       className: 'center',
@@ -56,7 +58,7 @@ const Product = ({title}) => {
       </h1>
       <Slider {...settings}>
         {data.map((item) => (
-          <Card key={item.name} item={item} />
+          <Card key={item.id} item={item} />
         ))}
       </Slider>
 
