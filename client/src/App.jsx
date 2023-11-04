@@ -4,6 +4,8 @@ import {
   RouterProvider,
   Outlet,
   useLocation,
+  Router,
+  Route,
 } from 'react-router-dom';
 
 import Home from './pages/HomePage/Home';
@@ -20,18 +22,44 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PasswordReset from './pages/PassReset/PasswordReset';
 
+// Admin Dashboard Components
+import Dashboard from './pages/Admin/AdminPages/Dashboard/Dashboard/Dashboard';
+import DashboardTopNav from './pages/Admin/AdminPages/AdminComponents/DashboardNavbar/DashboardTopNav';
+import DashboardNavbar from './pages/Admin/AdminPages/AdminComponents/DashboardNavbar/DashboardNavbar';
+import DashboardFooter from './pages/Admin/AdminPages/AdminComponents/DashboardFooter/DashboardFooter';
+
+import Listings from './pages/Admin/AdminPages/Dashboard/AllProducts/Listings';
+
+
 function App() {
  
  
-  const Layout = () => {
+  const Layout = ({children}) => {
      return (
        <div className="app">
          <Navbar />
-         <Outlet />
+        {children}
          <Footer />
        </div>
      );
    };
+
+
+   const DashboardLoyout = ({children}) => {
+     return (
+       <>
+         <div className="dashboard-layout">
+           <DashboardTopNav />
+           <div className="Side-Nav dashboard-content">
+             <DashboardNavbar />
+           </div>
+           <div className="Dashboard ">{children}</div>
+          <DashboardFooter />
+         </div> 
+       </>
+     );
+
+   }
 
 
 
@@ -46,46 +74,73 @@ function App() {
   };
 
 
-   const router = createBrowserRouter([
-     {
-       path: '/',
-       element: (
-         <>
-           <ScrollToTop />
-           <Layout />
-         </>
-       ),
-       children: [
-         {
-           path: '/',
-           element: <Home />,
-         },
-         {
-           path: '/categories/:id',
-           element: <Category />,
-         },
-         {
-           path: '/product/:id',
-           element: <Product />,
-         },
-         {
-           path: '/cart',
-           element: <Cart />,
-         },
-         {path : '/login' , 
-          element : <Login/>
+  const regularRoute = [
+    {
+      path: '/',
+      element: (
+        <>
+          <ScrollToTop />
+
+          <Layout>
+            <Outlet />
+          </Layout>
+        </>
+      ),
+      children: [
+        {
+          path: '/',
+          element: <Home />,
         },
         {
-          path : '/signup',
-          element: <SignUp/>
+          path: '/categories/:id',
+          element: <Category />,
         },
         {
-          path : '/password_reset',
-          element: <PasswordReset/>
-        }
+          path: '/product/:id',
+          element: <Product />,
+        },
+        {
+          path: '/cart',
+          element: <Cart />,
+        },
+        { path: '/login', element: <Login /> },
+        {
+          path: '/signup',
+          element: <SignUp />,
+        },
+        {
+          path: '/password_reset',
+          element: <PasswordReset />,
+        },
         
-       ],
-     },
+      ],
+    },
+  ];
+
+  const dashboardRoute = [
+    {
+      path: '/dashboard',
+      element: (
+        <DashboardLoyout>
+          <Dashboard />
+        </DashboardLoyout>
+      ),
+    },
+     {
+      path: '/product_listings',
+      element: (
+        <DashboardLoyout>
+          <Listings />
+          
+        </DashboardLoyout>
+      ),
+    },
+  ];
+
+
+   const router = createBrowserRouter([
+     ...regularRoute , 
+     ...dashboardRoute,
    ]);
 
  
@@ -106,6 +161,7 @@ function App() {
         pauseOnHover
         theme="light"
       />
+     
     </>
   );
 }

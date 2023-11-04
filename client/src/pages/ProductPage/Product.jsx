@@ -13,7 +13,7 @@ const Product = () => {
 
      const iNum = useParams().id;
 
-     console.log(iNum);
+     console.log(data);
 
 
   const dispatch = useDispatch()
@@ -34,15 +34,19 @@ const Product = () => {
   };
 
   const handleAddToCart = () => {
+    const selectedItem = data.find(item => item.id === iNum)
+   if(selectedItem){
      dispatch(
        addToCart({
-         id: data.iNum,
-         name: data.name,
-         price: data.price,
-         image: data.img,
+         id: selectedItem.iNum,
+         name: selectedItem.name,
+         price: selectedItem.price,
+         image: selectedItem.img,
          quantity,
        })
      );
+   }
+   
   }
 
 
@@ -65,7 +69,7 @@ const Product = () => {
           <div className="md:flex md:items-center md:justify-between md:gap-10 md:mb-8">
             <div className="flex flex-col gap-5 md:flex-row-reverse md:w-[50%]">
               <img
-                src={data.img}
+                src={`../image/${activeImage}.png`}
                 className="w-full h-[400px] md:h-[500px] object-cover rounded-[20px]"
               />
               <div className="flex justify-between md:flex-col">
@@ -229,7 +233,7 @@ const Product = () => {
                     />
                   </div>
                   <button
-                  onClick={handleAddToCart()}
+                  onClick={handleAddToCart}
                   className="bg-[#000000] text-white w-full rounded-[62px]">
                     Add to Cart
                   </button>
