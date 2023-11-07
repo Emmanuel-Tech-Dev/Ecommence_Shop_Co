@@ -127,8 +127,8 @@ const Navbar = () => {
       <div
         className={
           !navOpen
-            ? 'div h-[85vh] bg-black/50 absolute w-[100%] z-[999] left-[-100%]  transition-all duration-300 ease-in-out'
-            : 'div h-[85vh] bg-black/50 absolute w-[100%] left-[0] z-[999] transition-all duration-300 ease-in-out'
+            ? 'div h-[85vh] bg-black/10 absolute w-[100%] z-[999] left-[-100%]  transition-all duration-300 ease-in-out'
+            : 'div h-[85vh] bg-black/10 absolute w-[100%] left-[0] z-[999] transition-all duration-300 ease-in-out'
         }
         onClick={() => setNavOpen(false)}
       >

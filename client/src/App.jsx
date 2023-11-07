@@ -9,9 +9,9 @@ import {
 } from 'react-router-dom';
 
 import Home from './pages/HomePage/Home';
-import Category from './pages/CategoryPage/Category'
-import Product from './pages/ProductPage/Product'
-import Cart from './pages/Cart/Cart'
+import Category from './pages/CategoryPage/Category';
+import Product from './pages/ProductPage/Product';
+import Cart from './pages/Cart/Cart';
 
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
@@ -29,39 +29,34 @@ import DashboardNavbar from './pages/Admin/AdminPages/AdminComponents/DashboardN
 import DashboardFooter from './pages/Admin/AdminPages/AdminComponents/DashboardFooter/DashboardFooter';
 
 import Listings from './pages/Admin/AdminPages/Dashboard/AllProducts/Listings';
-
+import Order from './pages/Admin/AdminPages/Dashboard/Orders/Order';
+import Customer from './pages/Admin/AdminPages/Dashboard/Customer/Customer';
 
 function App() {
- 
- 
-  const Layout = ({children}) => {
-     return (
-       <div className="app">
-         <Navbar />
+  const Layout = ({ children }) => {
+    return (
+      <div className="app">
+        <Navbar />
         {children}
-         <Footer />
-       </div>
-     );
-   };
+        <Footer />
+      </div>
+    );
+  };
 
-
-   const DashboardLoyout = ({children}) => {
-     return (
-       <>
-         <div className="dashboard-layout">
-           <DashboardTopNav />
-           <div className="Side-Nav dashboard-content">
-             <DashboardNavbar />
-           </div>
-           <div className="Dashboard ">{children}</div>
+  const DashboardLoyout = ({ children }) => {
+    return (
+      <>
+        <div className="dashboard-layout">
+          <DashboardTopNav />
+          <div className="Side-Nav dashboard-content">
+            <DashboardNavbar />
+          </div>
+          <div className="Dashboard relative ">{children}</div>
           <DashboardFooter />
-         </div> 
-       </>
-     );
-
-   }
-
-
+        </div>
+      </>
+    );
+  };
 
   const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -72,7 +67,6 @@ function App() {
 
     return null;
   };
-
 
   const regularRoute = [
     {
@@ -112,7 +106,6 @@ function App() {
           path: '/password_reset',
           element: <PasswordReset />,
         },
-        
       ],
     },
   ];
@@ -126,31 +119,37 @@ function App() {
         </DashboardLoyout>
       ),
     },
-     {
+    {
+      path: '/orders',
+      element: (
+        <DashboardLoyout>
+          <Order />
+        </DashboardLoyout>
+      ),
+    },
+    {
       path: '/product_listings',
       element: (
         <DashboardLoyout>
           <Listings />
-          
+        </DashboardLoyout>
+      ),
+    }, {
+      path: '/customers',
+      element: (
+        <DashboardLoyout>
+          <Customer />
         </DashboardLoyout>
       ),
     },
   ];
 
-
-   const router = createBrowserRouter([
-     ...regularRoute , 
-     ...dashboardRoute,
-   ]);
-
- 
-
+  const router = createBrowserRouter([...regularRoute, ...dashboardRoute]);
 
   return (
     <>
       <RouterProvider router={router} />
       <ToastContainer
-      
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -161,7 +160,6 @@ function App() {
         pauseOnHover
         theme="light"
       />
-     
     </>
   );
 }
