@@ -1,7 +1,6 @@
-
-
-import {HiArrowLongUp} from 'react-icons/hi2'
+import { HiArrowLongUp } from 'react-icons/hi2';
 import Table from '../../AdminComponents/DashTable/Table';
+import TopProduct from '../../AdminComponents/TopProducts/TopProduct';
 
 const Dashboard = () => {
   return (
@@ -10,10 +9,10 @@ const Dashboard = () => {
         <h1 className="text-[24px]">Dashboard</h1>
       </div>
       <div className="top flex gap-10 items-center ">
-        <div className="box bg-green-400"></div>
-        <div className="box bg-white"></div>
+        <div className="box bg-green-400 border"></div>
+        <div className="box bg-white border"></div>
         <div className="mid-box gap-10 flex flex-col items-center">
-          <div className="box-2">
+          <div className="box-2 border">
             <div className="top flex items-center justify-between px-4 py-2">
               <div>
                 <h3 className="font-satoshi-md text-[18px]">Orders</h3>
@@ -28,7 +27,7 @@ const Dashboard = () => {
             </div>
             <div className="bottom h-3 bg-red-400"></div>
           </div>
-          <div className="box-2 ">
+          <div className="box-2 border">
             <div className="top flex items-center justify-between px-4 py-2">
               <div>
                 <h3 className="font-satoshi-md text-[18px]">Customers</h3>
@@ -46,12 +45,11 @@ const Dashboard = () => {
         </div>
       </div>
 
-{/* Tables  */}
-
-<Table/>
-
+      {/* Tables  */}
+      <Table />
+      <TopProduct />
     </div>
   );
-}
+};
 
-export default Dashboard
+export default Dashboard;

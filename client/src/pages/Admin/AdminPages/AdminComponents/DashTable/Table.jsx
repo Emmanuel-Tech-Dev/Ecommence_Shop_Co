@@ -4,6 +4,7 @@ const Table = () => {
   return (
     <div>
       <table className="w-full text-justify my-10 ">
+     
         <thead className="border w-full bg-white h-[8vh] text-[14px] text-[#383e42]">
           <th>Order No.</th>
           <th>Customer</th>
