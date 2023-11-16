@@ -1,13 +1,34 @@
-import  { useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { RxCaretRight } from 'react-icons/rx';
 import { VscSettings } from 'react-icons/vsc';
 
 import { data } from '../../Data';
 import BoxCards from '../../components/Cards/BoxCards';
 import FilterModal from '../../components/Modals/FilterModal';
-
+import {useSelector} from 'react-redux'
+import { collection, onSnapshot } from 'firebase/firestore';
+import { database } from '../../firebase/config';
 const Category = () => {
   const [openModal, setOpenModal] = useState(false);
+
+  const [data , setData] = useState([])
+const collectionRef = collection(database , 'products')
+  useEffect(() => {
+    
+ const fetchData = async () => {
+   const unsubscribe = onSnapshot(collectionRef, (querySnapshot) => {
+     const data = [];
+     querySnapshot.forEach((doc) => {
+       data.push({ id: doc.id, ...doc.data() });
+     });
+     setData(data);
+   });
+   return () => unsubscribe();
+ };
+
+ fetchData();
+
+  } , [])
 
   const handleOpen = () => {
     setOpenModal(!openModal);

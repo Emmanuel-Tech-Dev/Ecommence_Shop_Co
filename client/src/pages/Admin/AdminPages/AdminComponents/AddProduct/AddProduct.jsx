@@ -1,7 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import BtnLoader from '../../../../../components/Loading/BtnLoader';
+import { addDoc, collection } from 'firebase/firestore';
+import { database, storage } from '../../../../../firebase/config';
+import { toast } from 'react-toastify';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
+  const [data, setData] = useState({});
+  const [file, setFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null); // State to store image preview URL
+  const [submit, setSubmit] = useState(false);
+  const collectionRef = collection(database, 'products');
+
+  const handleInput = (e) => {
+    if (e.target.type === 'file') {
+      // Handle file separately
+      const selectedFile = e.target.files[0];
+
+      // Set the selected file and generate a preview URL
+      setFile(selectedFile);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      if (selectedFile) {
+        reader.readAsDataURL(selectedFile);
+      } else {
+        setImagePreview(null);
+      }
+    } else {
+      let newInput = { [e.target.name]: e.target.value };
+      setData({ ...data, ...newInput });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+
+    try {
+      setSubmit(true);
+
+      // Upload file to Firebase Storage
+      let downloadURL = null;
+      if (file) {
+        const storageRef = ref(storage, 'files/' + file.name);
+        await uploadBytesResumable(storageRef, file);
+        downloadURL = await getDownloadURL(storageRef);
+      }
+
+      // Add product data to Firestore
+      await addDoc(collectionRef, {
+        productName: data.productName,
+        regPrice: data.regPrice,
+        stockPrice: data.stockPrice,
+        proDescription: data.proDescription,
+        imageUrl: downloadURL, // Add the download URL to your Firestore data
+      });
+
+      toast.success('Product added successfully!');
+      setData({});
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setSubmit(false);
+      setFile(null); // Clear the file state after submission
+      setImagePreview(null); // Clear the image preview
+     setIsAddSlide(false) // set slide to false
+    }
+    
+  };
+
+
   return (
     <div
       className={
@@ -26,7 +96,7 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
         </div>
 
         {/* Form Fields */}
-        <form className="px-4 ">
+        <form className="px-4 " onSubmit={handleSubmit}>
           <div className="space-y-1.5">
             <label htmlFor="name" className="font-satoshi text-[14px]">
               Product Name
@@ -34,7 +104,9 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
             <br />
             <input
               type="text"
+              name="productName"
               id="name"
+              onChange={(e) => handleInput(e)}
               placeholder="product name"
               className="border border-blue-400 w-full rounded py-2 indent-2"
             />
@@ -46,7 +118,9 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
             <br />
             <input
               type="text"
+              name="regPrice"
               id="rPrice"
+              onChange={(e) => handleInput(e)}
               placeholder="regular price"
               className="border border-blue-400 w-full rounded py-2 indent-2"
             />
@@ -59,33 +133,55 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
             <br />
             <input
               type="text"
+              name="stockPrice"
               id="sPrice"
+              onChange={(e) => handleInput(e)}
               placeholder="stock price"
               className="border border-blue-400 w-full rounded py-2 indent-2"
             />
           </div>
-          
-           <div className="space-y-1.5 mt-5">
-           
-          
+
+          <div className="space-y-1.5 mt-5">
             <textarea
               type="text"
-              id="sPrice"
+              name="proDescription"
+              id="proDescription"
+              onChange={(e) => handleInput(e)}
               placeholder="Product Description"
               className="border border-blue-400 w-full rounded py-2 indent-2 h-[100px]"
             />
           </div>
           <div className="space-y-1.5 mt-4">
-            <input type="file" id="file" className="hidden" />
-            <label htmlFor="file" className="font-satoshi  text-[14px] cursor-pointer">
-              <div className=" h-[100px] w-full bg-[#eef3f7] rounded flex items-center justify-center">
-                <span className='text-[#92a3ae]'>Add image file</span>
+            <input
+              type="file"
+              name="file"
+              id="file"
+              onChange={(e) => handleInput(e)}
+              className="hidden"
+            />
+            <label
+              htmlFor="file"
+              className="font-satoshi text-[14px] cursor-pointer"
+            >
+              <div className="h-[100px] w-full bg-[#eef3f7] rounded flex items-center justify-center">
+                {imagePreview ? (
+                  <img
+                    src={imagePreview}
+                    alt="Preview"
+                    className="max-h-full max-w-full"
+                  />
+                ) : (
+                  <span className="text-[#92a3ae]">Add image file</span>
+                )}
               </div>
             </label>
           </div>
 
-          <button className='mt-3 text-center w-full py-2 bg-blue-400 rounded text-white'>
-            Add New Product 
+          <button
+            // onClick={handleSubmit}
+            className="mt-3 text-center w-full py-2 bg-blue-400 rounded text-white"
+          >
+            {submit ? <BtnLoader /> : 'Add New Product'}
           </button>
         </form>
       </div>

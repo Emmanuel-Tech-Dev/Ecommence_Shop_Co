@@ -50,7 +50,8 @@ const Listings = () => {
             <input type="checkbox" />
           </th>
           <th className="border-r w-[50%]">Name</th>
-          <th className="border-r ">Price</th>
+          <th className="border-r ">Regular Price</th>
+          <th className="border-r "> Stock Price</th>
           <th className="border-r">Stock</th>
           <th className="border-r text-center flex items-center justify-center">
             <button className="text-center hover:bg-[#eef3f7] w-[2.5rem] h-[2.5rem] rounded-[3.1rem] transition-all duration-300 ease-in-out">

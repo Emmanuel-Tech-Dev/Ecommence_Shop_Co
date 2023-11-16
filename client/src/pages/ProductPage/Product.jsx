@@ -3,18 +3,38 @@ import { RxCaretRight } from 'react-icons/rx';
 import { AiOutlineCheck, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { VscSettings } from 'react-icons/vsc';
 import Products from '../../components/Products/Products';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/cartReducer';
-import { data } from '../../Data';
+import { collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { database } from '../../firebase/config';
+import {toast } from 'react-toastify'
 
 const Product = () => {
+const [data , setData] = useState([])
+     const id = useParams().id;
+     
+ const collectionRef = collection(database, 'products');
+ const documentRef = doc(collectionRef, id);
 
-     const iNum = useParams().id;
+ useEffect(() => {
+   const fetchData = async () => {
+     try {
+       const docSnapshot = await getDoc(documentRef);
+       if (docSnapshot.exists()) {
+         setData({ id: docSnapshot.id, ...docSnapshot.data() });
+       } else {
+         console.error('Document does not exist!');
+       }
+     } catch (error) {
+       console.error('Error fetching product:', error.message);
+     }
+   };
 
-     console.log(data);
-
+   fetchData();
+ }, [documentRef]);
+  console.log(data)
 
   const dispatch = useDispatch()
 
@@ -34,20 +54,21 @@ const Product = () => {
   };
 
   const handleAddToCart = () => {
-    const selectedItem = data.find(item => item.id === iNum)
-   if(selectedItem){
-     dispatch(
-       addToCart({
-         id: selectedItem.iNum,
-         name: selectedItem.name,
-         price: selectedItem.price,
-         image: selectedItem.img,
-         quantity,
-       })
-     );
-   }
-   
-  }
+    const selectedItem = data;
+    if (selectedItem) {
+      dispatch(
+        addToCart({
+          id: selectedItem.id,
+          name: selectedItem.productName,
+          price: selectedItem.stockPrice,
+          image: selectedItem.imageUrl, // replace with the actual property for image
+          quantity,
+        })
+      );
+    }
+    toast.success(`${data.productName} Added to cart `)
+  };
+
 
 
   return (
@@ -69,7 +90,7 @@ const Product = () => {
           <div className="md:flex md:items-center md:justify-between md:gap-10 md:mb-8">
             <div className="flex flex-col gap-5 md:flex-row-reverse md:w-[50%]">
               <img
-                src={`../image/${activeImage}.png`}
+                src={data?.imageUrl}
                 className="w-full h-[400px] md:h-[500px] object-cover rounded-[20px]"
               />
               <div className="flex justify-between md:flex-col">
@@ -105,25 +126,23 @@ const Product = () => {
             <div className="container md:w-[50%]">
               <div className="desc mt-8">
                 <h3 className="font-integral text-[24px] md:text-[40px]">
-                  ONE LIFE GRAPHIC T-SHIRT
+                 {data?.productName}
                 </h3>
                 <div className="flex items-center gap-3 my-3">
                   <img src="../image/ratings.png" className="h-[18px]" />
                   <span className="text-[14px]">4.5/5</span>
                 </div>
                 <div className="flex items-center gap-4 font-satoshi-bold">
-                  <h2 className="text-[24px] md:text-[32px]">$260</h2>
+                  <h2 className="text-[24px] md:text-[32px]">${data?.stockPrice}</h2>
                   <h2 className="text-[24px] md:text-[32px] opacity-[.3] line-through">
-                    $300
+                    ${data?.regPrice}
                   </h2>
                   <span className="text-[14px] font-satoshi-md py-1.5 px-3 bg-[#FF333310] text-[#FF3333] rounded-[62px]">
                     -40%
                   </span>
                 </div>
                 <p className="my-3 mb-5 text-[14px] opacity-[.6] md:text-[16px]">
-                  This graphic t-shirt which is perfect for any occasion.
-                  Crafted from a soft and breathable fabric. It offers superior
-                  comfort and style
+                  {data?.proDescription}
                 </p>
               </div>
               <hr />

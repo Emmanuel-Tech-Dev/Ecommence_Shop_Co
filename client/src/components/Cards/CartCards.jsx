@@ -2,22 +2,38 @@ import React , {useState} from 'react'
 
 import { RiDeleteBinFill } from 'react-icons/ri';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
-const CartCards = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import { removeItem } from '../../redux/cartReducer';
+import { toast } from 'react-toastify';
+const CartCards = ({item}) => {
 
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState(item.quantity);
+
+
+    const dispatch= useDispatch()
+
+    const handleItemDelete = () => {
+     dispatch(removeItem(item.id))
+     toast.error(`${products.name} removed from cart`)
+    }
+
   return (
     <div>
-      <div className="items flex items-start gap-6">
+ 
+      
+       <div className="items flex items-start gap-6">
         <div className="left">
-          <img src="../image/image 7.png" className=" w-[150px]" />
+          <img src={item.image} className=" w-[150px]" />
         </div>
         <div className="right w-full">
           <div className="top flex items-center justify-between">
             <h5 className="font-satoshi-bold text-[16px] md:text-[20px]">
-              Black Graphic T-shirt
+            {item.productName}
             </h5>
 
-            <RiDeleteBinFill color="#FF3333" size={20} />
+            <RiDeleteBinFill color="#FF3333" size={20} className='cursor-pointer' 
+            onClick={handleItemDelete}
+            />
           </div>
 
           <h6 className="text-[12px] md:text-[14px]">
@@ -27,7 +43,7 @@ const CartCards = () => {
             Color : <span className="opacity-[.6]">White</span>
           </h6>
           <div className="btm mt-2 flex items-center justify-between">
-            <h3 className="font-satoshi-bold text-[20px] md:text-[24px]">$140</h3>
+            <h3 className="font-satoshi-bold text-[20px] md:text-[24px]">${item.price * quantity}</h3>
 
             <div className="bg-[#F0F0F0] py-2 px-4  flex items-center gap-4 rounded-[62px] ">
               <AiOutlineMinus
@@ -47,6 +63,8 @@ const CartCards = () => {
           </div>
         </div>
       </div>
+    
+     
     </div>
   );
 }

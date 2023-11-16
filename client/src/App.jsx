@@ -68,6 +68,8 @@ function App() {
     return null;
   };
 
+  //User interface Routing
+
   const regularRoute = [
     {
       path: '/',
@@ -110,6 +112,7 @@ function App() {
     },
   ];
 
+  // Dashboard Routing
   const dashboardRoute = [
     {
       path: '/dashboard',

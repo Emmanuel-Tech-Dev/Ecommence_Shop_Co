@@ -2,13 +2,37 @@ import React, { useState } from 'react';
 import { RxCaretRight } from 'react-icons/rx';
 import { BsTag, BsArrowRight } from 'react-icons/bs';
 import CartCards from '../../components/Cards/CartCards';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 const Cart = () => {
   const products = useSelector((state) => state.cart.products);
 
-  console.log(products)
-  
+  console.log(products);
+
+  const subTotal = () => {
+    let total = 0;
+    // Calculate total without tax
+    products.forEach((item) => (total += item.quantity * item.price));
+
+    return total.toFixed(2);
+  };
+
+  const discount = () => {
+     const discountPercentage = 0.2;
+     const discountAmount = subTotal() * discountPercentage;
+     const discountPrice = subTotal() - discountAmount;
+     return discountPrice.toFixed(2)
+  }
+ 
+    const totalAmount = () => {
+      const deliveryFee = 15;
+      return (
+        parseFloat(subTotal()) -
+        parseFloat(discount()) +
+        deliveryFee
+      ).toFixed(2);
+    };
+
   return (
     <div className="px-4 md:px-20">
       <hr className="mb-4" />
@@ -23,18 +47,23 @@ const Cart = () => {
       </div>
       <h1 className="text-[32px] md:text-[40px]">My Cart</h1>
       <div className="container flex flex-col items-start md:flex-row md:justify-between md:gap-5">
-        <div className="my-5 w-full border p-3 rounded-[20px] md:w-[70%]">
-          {products.map((item) => (
-            <>
-              <CartCards />
-              <hr className="my-3" />
-            </>
-          ))}
+        {products.length === 0 ? (
+          <div className="text-center font-satoshi-md m-auto flex justify-center items-center ">
+            <h3 className="text-[16px] my-10 opacity-[.5] md:text-[24px]">
+              Cart list is empty
+            </h3>
+          </div>
+        ) : (
+          <div className="my-5 w-full border p-3 rounded-[20px] md:w-[70%]">
+            {products.map((item) => (
+              <>
+                <CartCards key={item.id} item={item} />
+                <hr className="my-3" />
+              </>
+            ))}
+          </div>
+        )}
 
-          {/* <CartCards />
-          <hr className="my-3" />
-          <CartCards /> */}
-        </div>
         <div className="my-5 border p-3 rounded-[20px] w-full md:w-[30%]">
           <h2 className="font-satoshi-bold text-[20px] md:text-[24px]">
             Order Summary
@@ -42,12 +71,14 @@ const Cart = () => {
           <div className="details mt-4">
             <div className="sub flex items-center justify-between">
               <h4 className="opacity-[.6] md:text-[20px]">Subtotal</h4>
-              <h2 className="font-satoshi-bold md:text-[20px]">$565</h2>
+              <h2 className="font-satoshi-bold md:text-[20px]">
+                ${subTotal()}
+              </h2>
             </div>
             <div className="sub flex items-center justify-between my-4">
               <h4 className="opacity-[.6] md:text-[20px]">Discount (-20%)</h4>
               <h2 className="font-satoshi-bold md:text-[20px] text-[#ff3333]">
-                -$113
+                -${discount()}
               </h2>
             </div>
             <div className="sub flex items-center justify-between">
@@ -57,7 +88,7 @@ const Cart = () => {
             <hr className="my-4" />
             <div className="sub flex items-center justify-between">
               <h4 className=" md:text-[20px]">Total</h4>
-              <h2 className="font-satoshi-bold md:text-[20px]">$467</h2>
+              <h2 className="font-satoshi-bold md:text-[20px]">${totalAmount()}</h2>
             </div>
             <form className="my-5 flex items-center justify-between gap-5">
               <div className="bg-[#f0f0f0] w-full rounded-[62px] flex items-center px-4 gap-5">
