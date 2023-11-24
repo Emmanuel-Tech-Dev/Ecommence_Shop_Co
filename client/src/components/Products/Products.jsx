@@ -30,6 +30,17 @@ const Product = ({title}) => {
 
   } , [])
 
+console.log(data)
+
+ const filterProducts = data
+   .slice()
+   .reverse()
+   .slice(0, 5)
+   
+  //  .sort(
+  //    (a, b) =>
+  //      new Date() - new Date)
+  //  );
 
     const settings = {
       className: 'center',
@@ -78,7 +89,7 @@ const Product = ({title}) => {
         {title}
       </h1>
       <Slider {...settings}>
-        {data.map((item) => (
+        {filterProducts.map((item) => (
           <Card key={item.id} item={item} />
         ))}
       </Slider>

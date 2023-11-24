@@ -3,11 +3,12 @@ import { FiSearch } from 'react-icons/fi';
 import ListingTable from '../../AdminComponents/ListingTable/ListingTable';
 import { AiOutlineEllipsis, AiOutlinePlus } from 'react-icons/ai';
 import AddProduct from '../../AdminComponents/AddProduct/AddProduct';
+import UpdateProduct from '../../AdminComponents/AddProduct/UpdateProduct';
 
 const Listings = () => {
 
     const [isAddSlide, setIsAddSlide] = useState(false);
-
+ const [selectedProductId, setSelectedProductId] = useState(null);
     const handleActiveSlide = () => {
       setIsAddSlide(true);
     };
@@ -59,10 +60,11 @@ const Listings = () => {
             </button>
           </th>
         </thead>
-        <ListingTable />
+        <ListingTable isAddSlide={isAddSlide} setIsAddSlide={setIsAddSlide} setSelectedProductId={setSelectedProductId} />
       </table>
 
       <AddProduct isAddSlide={isAddSlide} setIsAddSlide={setIsAddSlide} />
+      <UpdateProduct isAddSlide={isAddSlide} setIsAddSlide={setIsAddSlide} selectedProductId={selectedProductId}/>
     </div>
   );
 };
