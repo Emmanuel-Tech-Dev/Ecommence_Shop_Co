@@ -6,29 +6,12 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Link, useParams } from 'react-router-dom';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { database } from '../../firebase/config';
-import { useEffect, useState } from 'react';
+
+import useFetchAllData from '../../GeneraFetch';
 
 
 const Product = ({title}) => {
-   const [data , setData] = useState([])
-
-  const collectionRef = collection(database , 'products')
-
-  useEffect(() => {
-     const fetchData = async () => {
-       const unsubscribe = onSnapshot(collectionRef, (querySnapshot) => {
-         const data = [];
-         querySnapshot.forEach((doc) => {
-           data.push({ id: doc.id, ...doc.data() });
-         });
-         setData(data);
-       });
-       return () => unsubscribe();
-     };
-
-     fetchData();
-
-  } , [])
+  const data = useFetchAllData('products')
 
 console.log(data)
 

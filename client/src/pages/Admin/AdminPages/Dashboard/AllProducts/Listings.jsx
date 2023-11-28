@@ -4,11 +4,16 @@ import ListingTable from '../../AdminComponents/ListingTable/ListingTable';
 import { AiOutlineEllipsis, AiOutlinePlus } from 'react-icons/ai';
 import AddProduct from '../../AdminComponents/AddProduct/AddProduct';
 import UpdateProduct from '../../AdminComponents/AddProduct/UpdateProduct';
+import ViewProduct from '../../AdminComponents/Modals/ViewProduct';
 
 const Listings = () => {
 
     const [isAddSlide, setIsAddSlide] = useState(false);
  const [selectedProductId, setSelectedProductId] = useState(null);
+ const [viewModal , setViewModal] = useState(false)
+
+ 
+
     const handleActiveSlide = () => {
       setIsAddSlide(true);
     };
@@ -60,11 +65,25 @@ const Listings = () => {
             </button>
           </th>
         </thead>
-        <ListingTable isAddSlide={isAddSlide} setIsAddSlide={setIsAddSlide} setSelectedProductId={setSelectedProductId} />
+        <ListingTable
+          isAddSlide={isAddSlide}
+          setIsAddSlide={setIsAddSlide}
+          setSelectedProductId={setSelectedProductId}
+          setViewModal={setViewModal}
+        />
       </table>
 
       <AddProduct isAddSlide={isAddSlide} setIsAddSlide={setIsAddSlide} />
-      <UpdateProduct isAddSlide={isAddSlide} setIsAddSlide={setIsAddSlide} selectedProductId={selectedProductId}/>
+      <UpdateProduct
+        isAddSlide={isAddSlide}
+        setIsAddSlide={setIsAddSlide}
+        selectedProductId={selectedProductId}
+      />
+      <ViewProduct
+        viewModal={viewModal}
+        setViewModal={setViewModal}
+        selectedProductId={selectedProductId}
+      />
     </div>
   );
 };

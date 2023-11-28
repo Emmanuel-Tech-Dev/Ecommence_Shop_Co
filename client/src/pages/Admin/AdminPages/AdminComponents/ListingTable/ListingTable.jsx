@@ -14,6 +14,7 @@ const ListingTable = ({
   isAddSlide,
   setIsAddSlide,
   setSelectedProductId,
+  setViewModal
 }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsloading] = useState(false);
@@ -58,6 +59,11 @@ const ListingTable = ({
   const handleEdit = (productId) => {
     setSelectedProductId(productId);
     setIsAddSlide(true);
+  }; 
+  
+  const handleView = (productId) => {
+    setSelectedProductId(productId);
+    setViewModal(true)
   };
 
   console.log(data);
@@ -101,7 +107,10 @@ const ListingTable = ({
                   <span className="tooltiptext">Edit Product</span>
                 </div>
                 <div className="tooltip">
-                  <button className="flex items-center gap-3 ">
+                  <button className="flex items-center gap-3 
+                  
+                  "
+                  onClick={() => handleView(item.id)}>
                     <LuEye size={20} />
                   </button>
                   <span className="tooltiptext">View Product</span>

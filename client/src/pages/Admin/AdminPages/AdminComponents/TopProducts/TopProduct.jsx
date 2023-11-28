@@ -1,97 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {FiShoppingBag} from 'react-icons/fi'
 import { BiCategoryAlt } from 'react-icons/bi';
 import {PiCube} from 'react-icons/pi'
 import {GoPeople} from 'react-icons/go'
+import { collection, onSnapshot } from 'firebase/firestore';
+import { database } from '../../../../../firebase/config';
+import useFetchAllData from '../../../../../GeneraFetch';
 
 const Traffic = () => {
+
+
+ const products = useFetchAllData('products')
+
+  const filterProducts = products.slice().reverse().slice(0, 5);
+   
+
+
   return (
     <div className="flex justify-between items-center mb-10">
       <div className="box-3 border p-6">
-        <div className="title mb-8">
+        <div className="title mb-6">
           <h3 className="font-satoshi-bold text-[17px]">Top Products</h3>
         </div>
+        {filterProducts.map((item) => (
+          <div className=" my-6" key={item.id}>
+            <div className=" flex justify-between items-center">
+              <div className="flex items-center gap-5 font-satoshi">
+                <img src={item.imageUrl} className="w-[50px]" />
+                <div>
+                  <h4 className="font-satoshi-md ">{item.productName}</h4>
+                  <span className="text-[#788791]">${item.regPrice}.00</span>
+                </div>
+              </div>
 
-        <div className=" my-8">
-          <div className=" flex justify-between items-center">
-            <div className="flex items-center gap-5 font-satoshi">
-              <img src="../image/image 7.png" className="w-[50px]" />
               <div>
-                <h4 className="font-satoshi-md ">Black T-Shirt</h4>
-                <span className="text-[#788791]">$30.00</span>
+                <h4 className="font-satoshi-md">${item.regPrice}</h4>
+                <span className="text-[#788791] float-right">20 sold</span>
               </div>
             </div>
-
-            <div>
-              <h4 className="font-satoshi-md">$350.00</h4>
-              <span className="text-[#788791] float-right">20 sold</span>
-            </div>
           </div>
-        </div>
-        <div className=" my-8">
-          <div className=" flex justify-between items-center">
-            <div className="flex items-center gap-5 font-satoshi">
-              <img src="../image/image 7.png" className="w-[50px]" />
-              <div>
-                <h4 className="font-satoshi-md ">Black T-Shirt</h4>
-                <span className="text-[#788791]">$30.00</span>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-satoshi-md">$350.00</h4>
-              <span className="text-[#788791] float-right">20 sold</span>
-            </div>
-          </div>
-        </div>
-        <div className=" my-8">
-          <div className=" flex justify-between items-center">
-            <div className="flex items-center gap-5 font-satoshi">
-              <img src="../image/image 7.png" className="w-[50px]" />
-              <div>
-                <h4 className="font-satoshi-md ">Black T-Shirt</h4>
-                <span className="text-[#788791]">$30.00</span>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-satoshi-md">$350.00</h4>
-              <span className="text-[#788791] float-right">20 sold</span>
-            </div>
-          </div>
-        </div>
-        <div className=" my-8">
-          <div className=" flex justify-between items-center">
-            <div className="flex items-center gap-5 font-satoshi">
-              <img src="../image/image 7.png" className="w-[50px]" />
-              <div>
-                <h4 className="font-satoshi-md ">Black T-Shirt</h4>
-                <span className="text-[#788791]">$30.00</span>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-satoshi-md">$350.00</h4>
-              <span className="text-[#788791] float-right">20 sold</span>
-            </div>
-          </div>
-        </div>
-        <div className=" my-8">
-          <div className=" flex justify-between items-center">
-            <div className="flex items-center gap-5 font-satoshi">
-              <img src="../image/image 7.png" className="w-[50px]" />
-              <div>
-                <h4 className="font-satoshi-md ">Black T-Shirt</h4>
-                <span className="text-[#788791]">$30.00</span>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-satoshi-md">$350.00</h4>
-              <span className="text-[#788791] float-right">20 sold</span>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
       <div className="box-3 border p-6">
         <div className="title mb-8">
@@ -133,7 +81,9 @@ const Traffic = () => {
             <div className="font-satoshi">
               <div>
                 <span className="text-[#788791] text-[14px]">Products</span>
-                <h4 className="font-satoshi-bold text-[20px]">200</h4>
+                <h4 className="font-satoshi-bold text-[20px]">
+                  {products.length}
+                </h4>
               </div>
             </div>
 
