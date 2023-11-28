@@ -4,8 +4,8 @@ import {
   RouterProvider,
   Outlet,
   useLocation,
-  Router,
-  Route,
+ 
+ 
 } from 'react-router-dom';
 
 import Home from './pages/HomePage/Home';
@@ -31,8 +31,16 @@ import DashboardFooter from './pages/Admin/AdminPages/AdminComponents/DashboardF
 import Listings from './pages/Admin/AdminPages/Dashboard/AllProducts/Listings';
 import Order from './pages/Admin/AdminPages/Dashboard/Orders/Order';
 import Customer from './pages/Admin/AdminPages/Dashboard/Customer/Customer';
+import { selectIsLoggedIn } from './redux/slice/authSlice';
+import { useSelector } from 'react-redux';
 
 function App() {
+
+   const isLoggedIn = useSelector(selectIsLoggedIn)
+
+
+  
+
   const Layout = ({ children }) => {
     return (
       <div className="app">
@@ -113,41 +121,48 @@ function App() {
   ];
 
   // Dashboard Routing
-  const dashboardRoute = [
-    {
-      path: '/dashboard',
-      element: (
-        <DashboardLoyout>
-          <Dashboard />
-        </DashboardLoyout>
-      ),
-    },
-    {
-      path: '/orders',
-      element: (
-        <DashboardLoyout>
-          <Order />
-        </DashboardLoyout>
-      ),
-    },
-    {
-      path: '/product_listings',
-      element: (
-        <DashboardLoyout>
-          <Listings />
-        </DashboardLoyout>
-      ),
-    }, {
-      path: '/customers',
-      element: (
-        <DashboardLoyout>
-          <Customer />
-        </DashboardLoyout>
-      ),
-    },
-  ];
+  
+   const dashboardRoute = [
+     {
+       path: '/dashboard',
+       element:  (
+         <DashboardLoyout>
+           <Dashboard />
+         </DashboardLoyout>
+       ) 
+     },
+     {
+       path: '/orders',
+       element: (
+         <DashboardLoyout>
+           <Order />
+         </DashboardLoyout>
+       ),
+     },
+     {
+       path: '/product_listings',
+       element: (
+         <DashboardLoyout>
+           <Listings />
+         </DashboardLoyout>
+       ),
+     },
+     {
+       path: '/customers',
+       element: (
+         <DashboardLoyout>
+           <Customer />
+         </DashboardLoyout>
+       ),
+     },
+   ];
 
-  const router = createBrowserRouter([...regularRoute, ...dashboardRoute]);
+
+  
+
+  const router = createBrowserRouter(
+   [...regularRoute , ...dashboardRoute]
+  );
 
   return (
     <>

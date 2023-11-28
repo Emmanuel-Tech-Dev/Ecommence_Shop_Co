@@ -59,7 +59,7 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
       });
 
       toast.success('Product added successfully!');
-      setData({});
+     
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -67,9 +67,19 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
       setFile(null); // Clear the file state after submission
       setImagePreview(null); // Clear the image preview
      setIsAddSlide(false) // set slide to false
+     setData({})
     }
     
   };
+
+
+  const handleCloseAdd = () => {
+    setIsAddSlide(false)
+    setData({})
+    setFile(null)
+    setImagePreview(null)
+
+  }
 
 
   return (
@@ -88,7 +98,7 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
           </div>
 
           <button
-            onClick={() => setIsAddSlide(false)}
+            onClick={handleCloseAdd}
             className=" hover:bg-[#eef3f7] w-[2.5rem] h-[2.5rem] rounded-[3.1rem] transition-all duration-300 ease-in-out "
           >
             <AiOutlineClose size={20} className="mx-auto" />

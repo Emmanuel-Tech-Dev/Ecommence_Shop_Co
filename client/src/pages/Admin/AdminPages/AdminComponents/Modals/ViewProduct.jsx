@@ -37,7 +37,7 @@ const ViewProduct = ({viewModal , setViewModal , selectedProductId}) => {
     <> {viewModal && 
       
       <div className= "absolute w-full h-full bg-black/5 right-[0] top-[0]">
-      <div className="mx-auto mt-[50px] w-[600px] p-5 bg-white h-[500px] rounded">
+      <div className="mx-auto sticky top-[20%] translate-[-50%] w-[600px] p-5 bg-white h-[500px] rounded">
         <div className='flex justify-between items- my-6'>
           <h1 className='text-[20px]'>{product?.productName}</h1>
           <span 
@@ -48,22 +48,22 @@ const ViewProduct = ({viewModal , setViewModal , selectedProductId}) => {
         </div>
         <div className='flex items-start gap-10'>
           <div className='w-[40%]'>
-                <img className='w-[400px] h-[230px]' src={product.imageUrl} alt='image' />
+                <img className='w-[400px] h-[230px]' src={product?.imageUrl} />
                 <img className='my-4 mx-auto' src='../image/ratings.png'/>
           </div>
           <div className='w-[50%]'>
-            <p>{product.proDescription}</p>
+            <p>{product?.proDescription}</p>
           </div>
          </div>
          <hr/>
          <div className='flex justify-between items-center my-10'>
           <div>
             <h1>Regular Price</h1>
-            <span className='font-satoshi-md text-[18px]'>${product.regPrice}</span>
+            <span className='font-satoshi-md text-[18px]'>${product?.regPrice}</span>
           </div>
            <div>
             <h1>Stock Price</h1>
-            <span className='font-satoshi-md text-[18px]'>${product.stockPrice}</span>
+            <span className='font-satoshi-md text-[18px]'>${product?.stockPrice}</span>
           </div>
          </div>
       </div>

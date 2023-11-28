@@ -6,12 +6,12 @@ import { database, storage } from '../../../../../firebase/config';
 import { toast } from 'react-toastify';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
-const UpdateProduct = ({ isAddSlide, setIsAddSlide, selectedProductId }) => {
+const UpdateProduct = ({ isUpdateSlide, setIsUpdateSlide, selectedProductId }) => {
   const [data, setData] = useState({});
   const [file, setFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null); // State to store image preview URL
   const [submit, setSubmit] = useState(false);
-  const collectionRef = collection(database, 'products');
+  //const collectionRef = collection(database, 'products');
 
   console.log(selectedProductId)
 
@@ -93,14 +93,14 @@ const handleInput = (e) => {
       setFile(null);
        setImagePreview(file ? imagePreview : data.imageUrl);
     
-      setIsAddSlide(false);
+      setIsUpdateSlide(false);
     }
   };
 
   return (
     <div
       className={
-        !isAddSlide
+        !isUpdateSlide
           ? 'div absolute right-[-100%] top-0 w-full bg-black/10 h-full z-[9] overflow-x-hidden transition-all duration-500 ease-in-out '
           : 'div absolute right-[0] top-0 w-full bg-black/10 h-full z-[9] transition-all duration-500 ease-in-out'
       }
@@ -113,7 +113,7 @@ const handleInput = (e) => {
           </div>
 
           <button
-            onClick={() => setIsAddSlide(false)}
+            onClick={() => setIsUpdateSlide(false)}
             className=" hover:bg-[#eef3f7] w-[2.5rem] h-[2.5rem] rounded-[3.1rem] transition-all duration-300 ease-in-out "
           >
             <AiOutlineClose size={20} className="mx-auto" />

@@ -9,6 +9,7 @@ import ViewProduct from '../../AdminComponents/Modals/ViewProduct';
 const Listings = () => {
 
     const [isAddSlide, setIsAddSlide] = useState(false);
+    const [isUpdateSlide, setIsUpdateSlide] = useState(false);
  const [selectedProductId, setSelectedProductId] = useState(null);
  const [viewModal , setViewModal] = useState(false)
 
@@ -67,7 +68,8 @@ const Listings = () => {
         </thead>
         <ListingTable
           isAddSlide={isAddSlide}
-          setIsAddSlide={setIsAddSlide}
+          isUpdateSlide={isUpdateSlide}
+          setIsUpdateSlide={setIsUpdateSlide}
           setSelectedProductId={setSelectedProductId}
           setViewModal={setViewModal}
         />
@@ -75,8 +77,8 @@ const Listings = () => {
 
       <AddProduct isAddSlide={isAddSlide} setIsAddSlide={setIsAddSlide} />
       <UpdateProduct
-        isAddSlide={isAddSlide}
-        setIsAddSlide={setIsAddSlide}
+        isUpdateSlide={isUpdateSlide}
+        setIsUpdateSlide={setIsUpdateSlide}
         selectedProductId={selectedProductId}
       />
       <ViewProduct

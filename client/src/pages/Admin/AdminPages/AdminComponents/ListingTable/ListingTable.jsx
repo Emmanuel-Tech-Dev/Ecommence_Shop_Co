@@ -11,8 +11,8 @@ import { LuEye } from 'react-icons/lu';
 import {toast} from 'react-toastify'
 
 const ListingTable = ({
-  isAddSlide,
-  setIsAddSlide,
+  isUpdateSlide,
+  setIsUpdateSlide,
   setSelectedProductId,
   setViewModal
 }) => {
@@ -58,7 +58,7 @@ const ListingTable = ({
 
   const handleEdit = (productId) => {
     setSelectedProductId(productId);
-    setIsAddSlide(true);
+    setIsUpdateSlide(true);
   }; 
   
   const handleView = (productId) => {
