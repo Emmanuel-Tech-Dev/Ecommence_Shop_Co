@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
+
 import { RxCaretRight } from 'react-icons/rx';
 import { AiOutlineCheck, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { VscSettings } from 'react-icons/vsc';
@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/cartReducer';
-import { collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { collection, doc, getDoc, } from 'firebase/firestore';
 import { database } from '../../firebase/config';
 import {toast } from 'react-toastify'
 
@@ -91,7 +91,7 @@ const [data , setData] = useState([])
             <div className="flex flex-col gap-5 md:flex-row-reverse md:w-[50%]">
               <img
                 src={data?.imageUrl}
-                className="w-full h-[400px] md:h-[500px] object-cover rounded-[20px]"
+                className="w-full object-contain h-[400px] md:h-[500px] rounded-[20px]"
               />
               <div className="flex justify-between md:flex-col">
                 <img

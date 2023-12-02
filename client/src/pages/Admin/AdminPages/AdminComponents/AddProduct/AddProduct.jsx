@@ -7,7 +7,12 @@ import { toast } from 'react-toastify';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
-  const [data, setData] = useState({});
+ const [data, setData] = useState({
+   productName: '',
+   regPrice: '',
+   stockPrice: '',
+   proDescription: '',
+ });
   const [file, setFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null); // State to store image preview URL
   const [submit, setSubmit] = useState(false);
@@ -30,8 +35,10 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
         setImagePreview(null);
       }
     } else {
-      let newInput = { [e.target.name]: e.target.value };
-      setData({ ...data, ...newInput });
+       setData((prevData) => ({
+         ...prevData,
+         [e.target.name]: e.target.value,
+       }));
     }
   };
 
@@ -67,7 +74,13 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
       setFile(null); // Clear the file state after submission
       setImagePreview(null); // Clear the image preview
      setIsAddSlide(false) // set slide to false
-     setData({})
+       setData({
+         productName: '',
+         regPrice: '',
+         stockPrice: '',
+         proDescription: '',
+       });
+  
     }
     
   };
@@ -75,7 +88,12 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
 
   const handleCloseAdd = () => {
     setIsAddSlide(false)
-    setData({})
+    setData({
+      productName: '',
+      regPrice: '',
+      stockPrice: '',
+      proDescription: '',
+    });
     setFile(null)
     setImagePreview(null)
 
@@ -135,7 +153,6 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
               className="border border-blue-400 w-full rounded py-2 indent-2"
             />
           </div>
-
           <div className="space-y-1.5 mt-3">
             <label htmlFor="sPrice" className="font-satoshi  text-[14px]">
               Stock Price
@@ -150,7 +167,7 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
               className="border border-blue-400 w-full rounded py-2 indent-2"
             />
           </div>
-
+          
           <div className="space-y-1.5 mt-5">
             <textarea
               type="text"
@@ -186,11 +203,7 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
               </div>
             </label>
           </div>
-
-          <button
-            // onClick={handleSubmit}
-            className="mt-3 text-center w-full py-2 bg-blue-400 rounded text-white"
-          >
+          <button className="mt-3 text-center w-full py-2 bg-blue-400 rounded text-white">
             {submit ? <BtnLoader /> : 'Add New Product'}
           </button>
         </form>

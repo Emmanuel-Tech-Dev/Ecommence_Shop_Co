@@ -1,18 +1,16 @@
 import React from 'react'
 import useFetchAllData from '../../../../../GeneraFetch'
-
-import {BarChart,
-Bar,
-
-Tooltip,
-
-ResponsiveContainer,
-CartesianGrid
-
+import{
+    AreaChart,
+    ResponsiveContainer,
+    CartesianAxis,
+    XAxis,
+    YAxis,
+    Tooltip,
+    Area
 } from 'recharts'
 
-
-const CustomTooltip = ({active, payload, label} ) => {
+const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip text-[12px] bg-[#000] text-white p-1 rounded">
@@ -27,13 +25,14 @@ const CustomTooltip = ({active, payload, label} ) => {
 };
 
 
-const Chart = () => {
-  const data = useFetchAllData('products')
-  console.log(data)
- 
+const AreaCharte = () => {
+
+    const data = useFetchAllData('products')
+
+
   return (
-    <ResponsiveContainer width={'100%'} height={90}>
-      <BarChart
+    <ResponsiveContainer width="100%" height={80}>
+      <AreaChart
         data={data}
         margin={{
           top: 0,
@@ -42,13 +41,19 @@ const Chart = () => {
           bottom: 0,
         }}
       >
-        <CartesianGrid strokeDasharray={'2 ,2'}></CartesianGrid>
+        <CartesianAxis strokeDasharray={'1 ,1'}></CartesianAxis>
+
         <Tooltip content={CustomTooltip} />
-        <Bar dataKey={'stockPrice'} fill="#c0facc"></Bar>
-        <Bar dataKey={'regPrice'} fill="#45a357"></Bar>
-      </BarChart>
+        <Area
+          type={'monotone'}
+          dataKey={'regPrice'}
+          stroke="#45a357"
+          strokeWidth={'1.3'}
+          fill="#c0facc"
+        />
+      </AreaChart>
     </ResponsiveContainer>
   );
 }
 
-export default Chart
+export default AreaCharte
