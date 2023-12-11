@@ -67,7 +67,7 @@ const SignUp = () => {
    await signInWithPopup(auth, provider)
      .then((response) => {
        const credentials = GoogleAuthProvider.credentialFromResult(response);
-       const token = credentials.accessToken;
+        credentials.accessToken;
        const user = response.user;
       
        console.log(user);
@@ -77,13 +77,12 @@ const SignUp = () => {
      })
      .catch((error) => {
        setIsLoading(true);
-       const errorCode = error.code;
-       const errorMessage = error.message;
+       
        toast.error(error.message.replace('Firebase:', ''));
        // The email of the user's account used.
-       const email = error.customData.email;
+       error.customData.email;
        // The AuthCredential type that was used.
-       const credential = GoogleAuthProvider.credentialFromError(error);
+       GoogleAuthProvider.credentialFromError(error);
        // ...
        setIsLoading(false);
      });

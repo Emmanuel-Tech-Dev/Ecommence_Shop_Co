@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import BtnLoader from '../../../../../components/Loading/BtnLoader';
 import { addDoc, collection } from 'firebase/firestore';
 import { database, storage } from '../../../../../firebase/config';
 import { toast } from 'react-toastify';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+
+import PropTypes from 'prop-types'
 
 const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
  const [data, setData] = useState({
@@ -211,5 +213,11 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
     </div>
   );
 };
+
+ AddProduct.propTypes = {
+  isAddSlide: PropTypes.bool.isRequired,
+  setIsAddSlide: PropTypes.func.isRequired,
+};
+
 
 export default AddProduct;

@@ -3,9 +3,7 @@ import Card from '../Cards/Card'
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Link, useParams } from 'react-router-dom';
-import { collection, onSnapshot } from 'firebase/firestore';
-import { database } from '../../firebase/config';
+import PropTypes from 'prop-types'
 
 import useFetchAllData from '../../GeneraFetch';
 
@@ -80,6 +78,10 @@ console.log(data)
      
     </div>
   );
+}
+
+Product.propTypes = {
+  title: PropTypes.string.isRequired
 }
 
 export default Product

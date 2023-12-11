@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { AiOutlineEllipsis, AiOutlineEye } from 'react-icons/ai';
 import { CiDeliveryTruck } from 'react-icons/ci';
 

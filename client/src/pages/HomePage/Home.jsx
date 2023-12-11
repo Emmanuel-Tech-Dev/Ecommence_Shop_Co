@@ -1,7 +1,7 @@
 
 import Category_s from '../../components/Category/Category_s';
 import Hero from '../../components/Hero/Hero'
-import Loading from '../../components/Loading/Loading';
+
 
 import Product from '../../components/Products/Products'
 

@@ -2,10 +2,8 @@ import  { useEffect, useState } from 'react';
 import { RxCaretRight } from 'react-icons/rx';
 import { VscSettings } from 'react-icons/vsc';
 
-import { data } from '../../Data';
 import BoxCards from '../../components/Cards/BoxCards';
 import FilterModal from '../../components/Modals/FilterModal';
-import {useSelector} from 'react-redux'
 import { collection, onSnapshot } from 'firebase/firestore';
 import { database } from '../../firebase/config';
 const Category = () => {
@@ -28,7 +26,7 @@ const collectionRef = collection(database , 'products')
 
  fetchData();
 
-  } , [])
+  } , [collectionRef])
 
   const handleOpen = () => {
     setOpenModal(!openModal);

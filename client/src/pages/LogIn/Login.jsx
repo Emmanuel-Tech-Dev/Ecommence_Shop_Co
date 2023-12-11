@@ -3,15 +3,18 @@ import { FiMail, FiLock } from 'react-icons/fi';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase/config';
-import { GoogleAuthProvider, signInWithEmailAndPassword , signInWithPopup,   } from 'firebase/auth';
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { UserContext } from '../../UserContext';
 import Loading from '../../components/Loading/Loading';
 
 const Login = () => {
   const navigate = useNavigate();
-  const {  isLoading, setIsLoading } =
-    useContext(UserContext);
+  const { isLoading, setIsLoading } = useContext(UserContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +25,7 @@ const Login = () => {
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed up
-        const user = userCredential.user;
+         userCredential.user;
         setIsLoading(false);
         toast.success('Login successfull');
         navigate('/');
@@ -37,37 +40,33 @@ const Login = () => {
       });
   };
 
- 
+  //Google Authentication
 
-  //Google Authentication 
-
-  const provider = new GoogleAuthProvider()
+  const provider = new GoogleAuthProvider();
   const handleGoogleAuth = async () => {
-    setIsLoading(true)
-   await signInWithPopup(auth, provider)
-     .then((response) => {
-       const credentials = GoogleAuthProvider.credentialFromResult(response);
-       const token = credentials.accessToken;
-       const user = response.user;
-     
-       console.log(user);
-       setIsLoading(false);
-         toast.success('Login successfull');
-       navigate('/');
-     })
-     .catch((error) => {
-       setIsLoading(true);
-       const errorCode = error.code;
-       const errorMessage = error.message;
-         toast.error(error.message.replace('Firebase:', ''));
-       // The email of the user's account used.
-       const email = error.customData.email;
-       // The AuthCredential type that was used.
-       const credential = GoogleAuthProvider.credentialFromError(error);
-       // ...
+    setIsLoading(true);
+    await signInWithPopup(auth, provider)
+      .then((response) => {
+        GoogleAuthProvider.credentialFromResult(response);
+        const user = response.user;
+
+        console.log(user);
         setIsLoading(false);
-     });
-  }
+        toast.success('Login successfull');
+        navigate('/');
+      })
+      .catch((error) => {
+        setIsLoading(true);
+
+        toast.error(error.message.replace('Firebase:', ''));
+        // The email of the user's account used.
+        error.customData.email;
+        // The AuthCredential type that was used.
+        GoogleAuthProvider.credentialFromError(error);
+        // ...
+        setIsLoading(false);
+      });
+  };
 
   return (
     <>
@@ -99,10 +98,12 @@ const Login = () => {
                 className="bg-transparent py-3 w-full text-black focus:outline-none"
               />
             </div>
- <Link to={'/password_reset'}>
- <span className='float-right mt-2 text-[14px] font-satoshi-md text-blue-500'>Forget Password</span>
-   </Link>
-           <button className="w-full text-center mt-5 bg-black text-white py-3 rounded-[62px] font-satoshi-md">
+            <Link to={'/password_reset'}>
+              <span className="float-right mt-2 text-[14px] font-satoshi-md text-blue-500">
+                Forget Password
+              </span>
+            </Link>
+            <button className="w-full text-center mt-5 bg-black text-white py-3 rounded-[62px] font-satoshi-md">
               Log in
             </button>
 

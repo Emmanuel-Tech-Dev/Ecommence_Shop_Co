@@ -1,4 +1,4 @@
-import React from 'react'
+
 import {FiMail} from 'react-icons/fi'
 import {
 
@@ -33,9 +33,10 @@ const Footer = () => {
           <div className="div mt-10">
             <img src="../image/logo.png" />
             <p className="opacity-[.6] py-3 md:w-[50%]">
-              We have clothes that suits your style and which you're proud to
+              We have clothes that suits your style and which you&rsquo;re proud to
               wear. From woment to men
             </p>
+           
             <div className="socials">
               <div className="social flex items-center gap-x-4">
                 <div className="i w-[32px] h-[32px] bg-white cursor-pointer flex items-center justify-center rounded-[50px]">
@@ -51,8 +52,10 @@ const Footer = () => {
             </div>
           </div>
           <div className="links flex flex-wrap justify-between items-center ">
-            <div className=''>
-              <h3 className='text-[14px] font-satoshi-md md:text-[16px]'>COMPANY</h3>
+            <div className="">
+              <h3 className="text-[14px] font-satoshi-md md:text-[16px]">
+                COMPANY
+              </h3>
               <ul>
                 <li>About</li>
                 <li>Features</li>
@@ -61,7 +64,9 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h3 className='text-[14px] font-satoshi-md md:text-[16px]'>HELP</h3>
+              <h3 className="text-[14px] font-satoshi-md md:text-[16px]">
+                HELP
+              </h3>
               <ul>
                 <li>Customer Support</li>
                 <li>Delivery Details</li>
@@ -70,7 +75,9 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h3 className='text-[14px] font-satoshi-md md:text-[16px]'>FAQ</h3>
+              <h3 className="text-[14px] font-satoshi-md md:text-[16px]">
+                FAQ
+              </h3>
               <ul>
                 <li>Account</li>
                 <li>Manage Deliveries</li>
@@ -79,7 +86,9 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h3 className='text-[14px] font-satoshi-md md:text-[16px]'>RESOURCES</h3>
+              <h3 className="text-[14px] font-satoshi-md md:text-[16px]">
+                RESOURCES
+              </h3>
               <ul>
                 <li>Free eBook</li>
                 <li>Development</li>
@@ -88,20 +97,19 @@ const Footer = () => {
               </ul>
             </div>
           </div>
- </div>
-          <hr className='mt-10' />
+        </div>
+        <hr className="mt-10" />
 
-          <div className="div opacity-[.6] text-center mt-8 text-[14px] md:flex md:items-center md:justify-between">
-            <p>Shop.co © 2000-2023, All Rights Reserved</p>
-            <div className='flex justify-center items-center mt-3 mb-5 md:mt-0 md:mb-0'>
-              <img src='../image/Badge.png'/>
-              <img src='../image/Badge-1.png'/>
-              <img src='../image/Badge-2.png'/>
-              <img src='../image/Badge-3.png'/>
-              <img src='../image/Badge-4.png'/>
-            </div>
+        <div className="div opacity-[.6] text-center mt-8 text-[14px] md:flex md:items-center md:justify-between">
+          <p>Shop.co © 2000-2023, All Rights Reserved</p>
+          <div className="flex justify-center items-center mt-3 mb-5 md:mt-0 md:mb-0">
+            <img src="../image/Badge.png" />
+            <img src="../image/Badge-1.png" />
+            <img src="../image/Badge-2.png" />
+            <img src="../image/Badge-3.png" />
+            <img src="../image/Badge-4.png" />
           </div>
-       
+        </div>
       </div>
     </footer>
   );

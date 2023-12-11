@@ -1,8 +1,7 @@
-import React from 'react';
-import { Link, useParams } from 'react-router-dom';
-const Card = ({item}) => {
 
- 
+import { Link} from 'react-router-dom';
+import PropTypes from 'prop-types'
+const Card = ({item}) => {
 
 
   return (
@@ -29,5 +28,10 @@ const Card = ({item}) => {
     </div>
   );
 };
+
+Card.propTypes = {
+  item : PropTypes.object.isRequired
+}
+
 
 export default Card;

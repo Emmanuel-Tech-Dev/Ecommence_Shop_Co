@@ -4,13 +4,14 @@ import {
   AreaChart,
   ResponsiveContainer,
   CartesianAxis,
-  XAxis,
-  YAxis,
+
   Tooltip,
   Area,
 } from 'recharts';
 
-const CustomTooltip = ({ active, payload, label }) => {
+import PropTypes from 'prop-types'
+
+const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip text-[12px] bg-[#000] text-white p-1 rounded">
@@ -24,6 +25,11 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
+CustomTooltip.propTypes = {
+  active: PropTypes.string.isRequired,
+  payload: PropTypes.bool.isRequired,
+  
+};
 
 
 const AreaChart2 = () => {

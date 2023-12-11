@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useEffect } from 'react';
 import {
   createBrowserRouter,
@@ -31,16 +32,15 @@ import DashboardFooter from './pages/Admin/AdminPages/AdminComponents/DashboardF
 import Listings from './pages/Admin/AdminPages/Dashboard/AllProducts/Listings';
 import Order from './pages/Admin/AdminPages/Dashboard/Orders/Order';
 import Customer from './pages/Admin/AdminPages/Dashboard/Customer/Customer';
-import { selectIsLoggedIn } from './redux/slice/authSlice';
-import { useSelector } from 'react-redux';
+// import { selectIsLoggedIn } from './redux/slice/authSlice';
+// import { useSelector } from 'react-redux';
 
 function App() {
 
-   const isLoggedIn = useSelector(selectIsLoggedIn)
+  //  const isLoggedIn = useSelector(selectIsLoggedIn)
 
 
   
-
   const Layout = ({ children }) => {
     return (
       <div className="app">
@@ -50,6 +50,12 @@ function App() {
       </div>
     );
   };
+
+  Layout.propTypes = {
+    children: PropTypes.object.isRequired,
+  };
+
+ 
 
   const DashboardLoyout = ({ children }) => {
     return (
@@ -65,6 +71,10 @@ function App() {
       </>
     );
   };
+
+   DashboardLoyout.propTypes = {
+     children: PropTypes.object.isRequired,
+   };
 
   const ScrollToTop = () => {
     const { pathname } = useLocation();

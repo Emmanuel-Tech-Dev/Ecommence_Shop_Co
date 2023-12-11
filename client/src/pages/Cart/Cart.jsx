@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+
 import { RxCaretRight } from 'react-icons/rx';
 import { BsTag, BsArrowRight } from 'react-icons/bs';
 import CartCards from '../../components/Cards/CartCards';
@@ -28,8 +28,7 @@ const Cart = () => {
       const deliveryFee = 15;
       return (
         parseFloat(subTotal()) -
-        parseFloat(discount()) +
-        deliveryFee
+        parseFloat(discount()) + deliveryFee
       ).toFixed(2);
     };
 

@@ -1,18 +1,16 @@
-import React from 'react'
+
 import useFetchAllData from '../../../../../GeneraFetch'
 
 import {BarChart,
 Bar,
-
 Tooltip,
-
 ResponsiveContainer,
 CartesianGrid
 
 } from 'recharts'
+import PropTypes from 'prop-types'
 
-
-const CustomTooltip = ({active, payload, label} ) => {
+const CustomTooltip = ({active, payload} ) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip text-[12px] bg-[#000] text-white p-1 rounded">
@@ -26,6 +24,10 @@ const CustomTooltip = ({active, payload, label} ) => {
   return null;
 };
 
+CustomTooltip.propTypes = {
+  active: PropTypes.string.isRequired,
+  payload: PropTypes.bool.isRequired,
+};
 
 const Chart = () => {
   const data = useFetchAllData('products')

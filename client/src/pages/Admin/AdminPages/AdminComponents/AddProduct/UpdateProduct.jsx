@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import BtnLoader from '../../../../../components/Loading/BtnLoader';
-import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import {doc, getDoc, updateDoc } from 'firebase/firestore';
 import { database, storage } from '../../../../../firebase/config';
 import { toast } from 'react-toastify';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+
+import PropTypes from 'prop-types'
 
 const UpdateProduct = ({ isUpdateSlide, setIsUpdateSlide, selectedProductId }) => {
   const [data, setData] = useState({});
@@ -217,5 +219,13 @@ const handleInput = (e) => {
     </div>
   );
 };
+
+UpdateProduct.propTypes = {
+  isUpdateSlide: PropTypes.bool.isRequired,
+  setIsUpdateSlide : PropTypes.func.isRequired,
+  selectedProductId: PropTypes.string.isRequired
+};
+
+
 
 export default UpdateProduct;

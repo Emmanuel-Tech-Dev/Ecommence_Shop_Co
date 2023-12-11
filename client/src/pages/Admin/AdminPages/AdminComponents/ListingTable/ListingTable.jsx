@@ -9,9 +9,9 @@ import {  RiDeleteBinLine } from 'react-icons/ri';
 import { LuEye } from 'react-icons/lu';
 
 import {toast} from 'react-toastify'
+import PropTypes from 'prop-types'
 
 const ListingTable = ({
-  isUpdateSlide,
   setIsUpdateSlide,
   setSelectedProductId,
   setViewModal
@@ -36,7 +36,7 @@ const ListingTable = ({
     };
 
     fetchData();
-  }, []);
+  }, [collectionRef]);
 
   //deleting a entry by id
   const handleDeleteItem = async (itemId) => {
@@ -131,6 +131,13 @@ const ListingTable = ({
       ))}
     </>
   );
+};
+
+ListingTable.propTypes = {
+  
+  setIsUpdateSlide : PropTypes.func.isRequired,
+  setSelectedProductId : PropTypes.func.isRequired,
+  setViewModal : PropTypes.func.isRequired,
 };
 
 export default ListingTable;

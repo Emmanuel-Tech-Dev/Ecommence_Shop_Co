@@ -76,11 +76,10 @@ const [data , setData] = useState([])
       <div className="px-4 md:px-20">
         <hr className="mb-4" />
         <div className="links flex gap-x-2 items-center mb-5 text-[14px] ">
-         <Link to={'/'}>
-          <h5 className="opacity-[.6] cursor-pointer">Home</h5>
-         </Link>
+          <Link to={'/'}>
+            <h5 className="opacity-[.6] cursor-pointer">Home</h5>
+          </Link>
 
-         
           <RxCaretRight />
           <h5 className="opacity-[.6] cursor-pointer">Shop</h5>
           <RxCaretRight />
@@ -126,14 +125,16 @@ const [data , setData] = useState([])
             <div className="container md:w-[50%]">
               <div className="desc mt-8">
                 <h3 className="font-integral text-[24px] md:text-[40px]">
-                 {data?.productName}
+                  {data?.productName}
                 </h3>
                 <div className="flex items-center gap-3 my-3">
                   <img src="../image/ratings.png" className="h-[18px]" />
                   <span className="text-[14px]">4.5/5</span>
                 </div>
                 <div className="flex items-center gap-4 font-satoshi-bold">
-                  <h2 className="text-[24px] md:text-[32px]">${data?.stockPrice}</h2>
+                  <h2 className="text-[24px] md:text-[32px]">
+                    ${data?.stockPrice}
+                  </h2>
                   <h2 className="text-[24px] md:text-[32px] opacity-[.3] line-through">
                     ${data?.regPrice}
                   </h2>
@@ -252,8 +253,9 @@ const [data , setData] = useState([])
                     />
                   </div>
                   <button
-                  onClick={handleAddToCart}
-                  className="bg-[#000000] text-white w-full rounded-[62px]">
+                    onClick={handleAddToCart}
+                    className="bg-[#000000] text-white w-full rounded-[62px]"
+                  >
                     Add to Cart
                   </button>
                 </div>
@@ -295,12 +297,10 @@ const [data , setData] = useState([])
                   <h2 className="text-[12px] font-satoshi-bold py-1">
                     Samantha D.
                   </h2>
-                  <p className="text-[14px] opacity-[.6] mb-3">
-                    "I abosulety love this t-shirt! The design is unique and the
-                    fabric feels so comfotable. As a fellow designer I
-                    appreciate the attention to detail it's become my favourite
-                    go-to shirt "
-                  </p>
+                  &ldquo;I absolutely love this t-shirt! The design is unique
+                  and the fabric feels so comfortable. As a fellow designer, I
+                  appreciate the attention to detail; it&rsquo;s become my
+                  favorite go-to shirt.&rdquo;
                   <span className="font-satoshi-md opacity-[.6]">
                     Posted on August 14, 2023{' '}
                   </span>
@@ -310,12 +310,10 @@ const [data , setData] = useState([])
                   <h2 className="text-[12px] font-satoshi-bold py-1">
                     Samantha D.
                   </h2>
-                  <p className="text-[14px] opacity-[.6] mb-3">
-                    "I abosulety love this t-shirt! The design is unique and the
-                    fabric feels so comfotable. As a fellow designer I
-                    appreciate the attention to detail it's become my favourite
-                    go-to shirt "
-                  </p>
+                  &ldquo;I absolutely love this t-shirt! The design is unique
+                  and the fabric feels so comfortable. As a fellow designer, I
+                  appreciate the attention to detail; it&rsquo;s become my
+                  favorite go-to shirt.&rdquo;
                   <span className="font-satoshi-md opacity-[.6]">
                     Posted on August 14, 2023{' '}
                   </span>

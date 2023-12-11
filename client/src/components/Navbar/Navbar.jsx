@@ -12,14 +12,16 @@ import { UserContext } from '../../UserContext';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase/config';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { SET_ACTIVE_USER } from '../../redux/slice/authSlice';
 
 const Navbar = () => {
+
+  const products = useSelector((state) => state.cart.products)
+
   const [navOpen, setNavOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-
   const { userData, setUserData } = useContext(UserContext);
 
   const dispatch = useDispatch();
@@ -39,7 +41,7 @@ const Navbar = () => {
         setUserData('');
       }
     });
-  }, []);
+  }, );
 
   const handleNavOpen = () => {
     setNavOpen(!navOpen);
@@ -73,7 +75,7 @@ const Navbar = () => {
           </Link>
 
           <div>
-            <ul className=" hidden md:block md:flex  font-satoshi">
+            <ul className=" hidden md:flex  font-satoshi">
               <li className=" cursor-pointer  py-4 px-4 hover:bg-gray-100 transition-all duration-300 ease-in-out">
                 Shop
               </li>
@@ -100,7 +102,14 @@ const Navbar = () => {
           </div>
           <FiSearch size={24} className="block md:hidden" />
           <Link to={'/cart'}>
+          <div className='relative'>
             <FiShoppingCart size={24} />
+          {products.length > 0 ?
+               <span className='absolute w-[8px] h-[8px] bg-black rounded-[50px] top-[0px] right-[-2px]'></span>
+      
+          : ''}
+           </div>
+            
           </Link>
           {userData ? (
             <div

@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { FiLock, FiMail } from 'react-icons/fi';
+import  { useContext, useState } from 'react';
+import {  FiMail } from 'react-icons/fi';
 import { UserContext } from '../../UserContext';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../../firebase/config';

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai';
-import { RiDeleteBinFill } from 'react-icons/ri';
-import { LuEye } from 'react-icons/lu';
+
 import { database } from '../../../../../firebase/config';
 import { doc, getDoc,  } from 'firebase/firestore';
 

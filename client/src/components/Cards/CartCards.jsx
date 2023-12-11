@@ -1,20 +1,22 @@
-import React , {useState} from 'react'
+import {useState} from 'react'
 
 import { RiDeleteBinFill } from 'react-icons/ri';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { removeItem } from '../../redux/cartReducer';
 import { toast } from 'react-toastify';
+import PropTypes from 'prop-types'
+
 const CartCards = ({item}) => {
 
     const [quantity, setQuantity] = useState(item.quantity);
 
-
+console.log(item)
     const dispatch= useDispatch()
 
     const handleItemDelete = () => {
      dispatch(removeItem(item.id))
-     toast.error(`${products.name} removed from cart`)
+     toast.error(`${item.name} removed from cart`)
     }
 
   return (
@@ -67,6 +69,10 @@ const CartCards = ({item}) => {
      
     </div>
   );
+}
+
+CartCards.propTypes = {
+  item: PropTypes.object.isRequired
 }
 
 export default CartCards
