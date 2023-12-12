@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+
 import {FiShoppingBag} from 'react-icons/fi'
 import { BiCategoryAlt } from 'react-icons/bi';
 import {PiCube} from 'react-icons/pi'
 import {GoPeople} from 'react-icons/go'
-import { collection, onSnapshot } from 'firebase/firestore';
-import { database } from '../../../../../firebase/config';
 import useFetchAllData from '../../../../../GeneraFetch';
 
 const Traffic = () => {

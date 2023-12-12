@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import ListingTable from '../../AdminComponents/ListingTable/ListingTable';
 import { AiOutlineEllipsis, AiOutlinePlus } from 'react-icons/ai';

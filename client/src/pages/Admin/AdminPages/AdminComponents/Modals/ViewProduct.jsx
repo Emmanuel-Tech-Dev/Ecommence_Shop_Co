@@ -4,6 +4,8 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { database } from '../../../../../firebase/config';
 import { doc, getDoc,  } from 'firebase/firestore';
 
+import PropTypes from 'prop-types'
+
 const ViewProduct = ({viewModal , setViewModal , selectedProductId}) => {
     
   const [product , setProduct] = useState()
@@ -74,5 +76,12 @@ const ViewProduct = ({viewModal , setViewModal , selectedProductId}) => {
   
   );
 };
+
+ViewProduct.propTypes = {
+  viewModal: PropTypes.bool.isRequired,
+  setViewModal :PropTypes.func.isRequired,
+  selectedProductId: PropTypes.string.isRequired
+};
+
 
 export default ViewProduct;
