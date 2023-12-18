@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { database } from './firebase/config';
 
+
+//A function to fetch data from firestore by passing in the table name 
 const useFetchAllData = (tableName) => {
   const [data, setData] = useState([]);
 

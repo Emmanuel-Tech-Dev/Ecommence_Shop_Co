@@ -1,11 +1,16 @@
-
 import { RxCaretRight } from 'react-icons/rx';
 import { BsTag, BsArrowRight } from 'react-icons/bs';
 import CartCards from '../../components/Cards/CartCards';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
+import StripeCheckout from 'react-stripe-checkout';
+import { useMemo, useState } from 'react';
+
 const Cart = () => {
   const products = useSelector((state) => state.cart.products);
+
+  const [totalAmount , setTotalAmount] = useState(0)
 
   console.log(products);
 
@@ -18,19 +23,32 @@ const Cart = () => {
   };
 
   const discount = () => {
-     const discountPercentage = 0.2;
-     const discountAmount = subTotal() * discountPercentage;
-     const discountPrice = subTotal() - discountAmount;
-     return discountPrice.toFixed(2)
-  }
+    const discountPercentage = 0.2;
+    const discountAmount = subTotal() * discountPercentage;
+    const discountPrice = subTotal() - discountAmount;
+    return discountPrice.toFixed(2);
+  };
+
  
-    const totalAmount = () => {
-      const deliveryFee = 15;
-      return (
-        parseFloat(subTotal()) -
-        parseFloat(discount()) + deliveryFee
-      ).toFixed(2);
-    };
+useMemo(() => {
+  const subTotal = products.reduce(
+    (acc, item) => acc + item.quantity * item.price,
+    0
+  );
+
+  const discountPercentage = 0.2;
+  const discountAmount = subTotal * discountPercentage;
+
+  const deliveryFee = 15;
+  const total = subTotal - discountAmount + deliveryFee;
+
+  setTotalAmount(total.toFixed(2));
+}, [products]);
+
+  const handleToken = (token) => {
+    console.log(token);
+    alert('You payment is successfull');
+  };
 
   return (
     <div className="px-4 md:px-20">
@@ -56,7 +74,12 @@ const Cart = () => {
           <div className="my-5 w-full border p-3 rounded-[20px] md:w-[70%]">
             {products.map((item) => (
               <>
-                <CartCards key={item.id} item={item} />
+                <CartCards
+                  key={item.id}
+                  item={item}
+                  totalAmount={totalAmount}
+                  setTotalAmount={setTotalAmount}
+                />
                 <hr className="my-3" />
               </>
             ))}
@@ -87,7 +110,9 @@ const Cart = () => {
             <hr className="my-4" />
             <div className="sub flex items-center justify-between">
               <h4 className=" md:text-[20px]">Total</h4>
-              <h2 className="font-satoshi-bold md:text-[20px]">${totalAmount()}</h2>
+              <h2 className="font-satoshi-bold md:text-[20px]">
+                ${totalAmount}
+              </h2>
             </div>
             <form className="my-5 flex items-center justify-between gap-5">
               <div className="bg-[#f0f0f0] w-full rounded-[62px] flex items-center px-4 gap-5">
@@ -104,9 +129,20 @@ const Cart = () => {
                 </button>
               </div>
             </form>
-            <button className=" flex items-center justify-center gap-5 w-full bg-black text-white py-3 px-4 rounded-[62px] font-satoshi-md">
-              Go to Checkout <BsArrowRight />
-            </button>
+            <StripeCheckout
+              stripeKey={import.meta.env.VITE_STRIPE_KEY}
+              token={handleToken}
+              name="Sho Co"
+              description={`Your total is $${totalAmount}`}
+              amount={totalAmount} // Convert total amount to cents
+              currency="USD"
+              shippingAddress
+              billingAddress={false}
+            >
+              <button className=" flex items-center justify-center gap-5 w-full bg-black text-white py-3 px-4 rounded-[62px] font-satoshi-md">
+                Go to Checkout <BsArrowRight />
+              </button>
+            </StripeCheckout>
           </div>
         </div>
       </div>

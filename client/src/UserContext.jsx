@@ -8,9 +8,6 @@ export const UserProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(false);
    const [data , setData] = useState([])
 
-
-   
- 
     return (
       <UserContext.Provider
         value={{ userData, setUserData, isLoading, setIsLoading ,data , setData }}
