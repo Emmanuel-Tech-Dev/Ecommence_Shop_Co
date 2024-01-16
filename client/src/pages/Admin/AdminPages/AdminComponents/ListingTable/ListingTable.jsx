@@ -1,42 +1,28 @@
-import { collection, deleteDoc, doc, onSnapshot } from 'firebase/firestore';
-import  { useEffect, useState } from 'react';
+import { collection, deleteDoc, doc } from 'firebase/firestore';
+
 
 import { database } from '../../../../../firebase/config';
-import BtnLoader from '../../../../../components/Loading/BtnLoader';
+// import BtnLoader from '../../../../../components/Loading/BtnLoader';
 
 import { FiEdit } from 'react-icons/fi';
-import {  RiDeleteBinLine } from 'react-icons/ri';
+import { RiDeleteBinLine } from 'react-icons/ri';
 import { LuEye } from 'react-icons/lu';
 
-import {toast} from 'react-toastify'
-import PropTypes from 'prop-types'
+import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
+import useFetchAllData from '../../../../../GeneraFetch';
 
 const ListingTable = ({
   setIsUpdateSlide,
   setSelectedProductId,
-  setViewModal
+  setViewModal,
 }) => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsloading] = useState(false);
+ 
+  const data = useFetchAllData('products')
 
   const collectionRef = collection(database, 'products');
 
-  useEffect(() => {
-    setIsloading(true);
-    const fetchData = async () => {
-      const unsubscribe = onSnapshot(collectionRef, (querySnapshot) => {
-        const data = [];
-        querySnapshot.forEach((doc) => {
-          data.push({ id: doc.id, ...doc.data() });
-        });
-        setData(data);
-        setIsloading(false);
-      });
-      return () => unsubscribe();
-    };
-
-    fetchData();
-  }, [collectionRef]);
+ 
 
   //deleting a entry by id
   const handleDeleteItem = async (itemId) => {
@@ -59,21 +45,16 @@ const ListingTable = ({
   const handleEdit = (productId) => {
     setSelectedProductId(productId);
     setIsUpdateSlide(true);
-  }; 
-  
+  };
+
   const handleView = (productId) => {
     setSelectedProductId(productId);
-    setViewModal(true)
+    setViewModal(true);
   };
 
   console.log(data);
   return (
     <>
-      {isLoading && (
-        <div className="w-full flex justify-center items-center mt-20">
-          <BtnLoader />
-        </div>
-      )}
       {data.map((item) => (
         <>
           <br></br>
@@ -107,10 +88,12 @@ const ListingTable = ({
                   <span className="tooltiptext">Edit Product</span>
                 </div>
                 <div className="tooltip">
-                  <button className="flex items-center gap-3 
+                  <button
+                    className="flex items-center gap-3 
                   
                   "
-                  onClick={() => handleView(item.id)}>
+                    onClick={() => handleView(item.id)}
+                  >
                     <LuEye size={20} />
                   </button>
                   <span className="tooltiptext">View Product</span>
@@ -134,10 +117,9 @@ const ListingTable = ({
 };
 
 ListingTable.propTypes = {
-  
-  setIsUpdateSlide : PropTypes.func.isRequired,
-  setSelectedProductId : PropTypes.func.isRequired,
-  setViewModal : PropTypes.func.isRequired,
+  setIsUpdateSlide: PropTypes.func.isRequired,
+  setSelectedProductId: PropTypes.func.isRequired,
+  setViewModal: PropTypes.func.isRequired,
 };
 
 export default ListingTable;

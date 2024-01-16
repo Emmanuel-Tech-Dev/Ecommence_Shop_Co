@@ -3,18 +3,21 @@ import { RxCaretRight } from 'react-icons/rx';
 import { AiOutlineCheck, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { VscSettings } from 'react-icons/vsc';
 import Products from '../../components/Products/Products';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/cartReducer';
 import { collection, doc, getDoc, } from 'firebase/firestore';
 import { database } from '../../firebase/config';
 import {toast } from 'react-toastify'
+import { UserContext } from '../../UserContext';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const Product = () => {
 const [data , setData] = useState([])
      const id = useParams().id;
-     
+     const isLoading = useContext(UserContext)
  const collectionRef = collection(database, 'products');
  const documentRef = doc(collectionRef, id);
 
@@ -73,7 +76,8 @@ const [data , setData] = useState([])
 
   return (
     <>
-      <div className="px-4 md:px-20">
+    { isLoading === true  ? (<><Skeleton width={300} height={400}/></>)   :  (
+         <div className="px-4 md:px-20">
         <hr className="mb-4" />
         <div className="links flex gap-x-2 items-center mb-5 text-[14px] ">
           <Link to={'/'}>
@@ -323,6 +327,8 @@ const [data , setData] = useState([])
           </div>
         </div>
       </div>
+    )}
+   
       <Products title={'YOU MIGHT ALSO LIKE'} />
     </>
   );

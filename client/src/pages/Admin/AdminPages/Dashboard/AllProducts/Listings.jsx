@@ -38,6 +38,16 @@ const Listings = () => {
                   <FiSearch size={20} />
                 </button>
               </div>
+              <div className="bg-white px-2 flex items-center border border-blue-400 rounded">
+                <input
+                  type="text"
+                  placeholder="Discount price on all purchases.."
+                  className="bg-transparent p-2 rounded-[62px]  focus:outline-none  placeholder:text-[14px]"
+                />
+                <button className=" bg-blue-400 rounded-[50px] p-2 text-white">
+                  <AiOutlinePlus />
+                </button>
+              </div>
             </form>
           </div>
 

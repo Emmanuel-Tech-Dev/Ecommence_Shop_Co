@@ -1,25 +1,42 @@
 import { RxCaretRight } from 'react-icons/rx';
 import { BsTag, BsArrowRight } from 'react-icons/bs';
 import CartCards from '../../components/Cards/CartCards';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import StripeCheckout from 'react-stripe-checkout';
-import { useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
+import { addDoc, collection } from 'firebase/firestore';
+import { database } from '../../firebase/config';
+import { toast } from 'react-toastify';
+import { UserContext } from '../../UserContext';
 
 const Cart = () => {
   const products = useSelector((state) => state.cart.products);
 
+  const userData = useContext(UserContext)
+
   const [totalAmount , setTotalAmount] = useState(0)
 
-  console.log(products);
+  const collectionRef = collection(database , 'orders')
+ 
+  console.log(userData)
+  
+
+
+const navigate = useNavigate()
+ 
+  //create a collection in the firebase store when user checks out 
+
+
+ 
 
   const subTotal = () => {
     let total = 0;
     // Calculate total without tax
     products.forEach((item) => (total += item.quantity * item.price));
 
-    return total.toFixed(2);
+ return total.toFixed(2);
   };
 
   const discount = () => {
@@ -28,7 +45,7 @@ const Cart = () => {
     const discountPrice = subTotal() - discountAmount;
     return discountPrice.toFixed(2);
   };
-
+ 
  
 useMemo(() => {
   const subTotal = products.reduce(
@@ -45,9 +62,43 @@ useMemo(() => {
   setTotalAmount(total.toFixed(2));
 }, [products]);
 
-  const handleToken = (token) => {
-    console.log(token);
+  
+
+const handleToken = async (token) => {
+   
+  if(!userData){
+    toast("Please login to purchase item")
+    navigate('/login')
+
+    return
+  }
+  
+  console.log(token);
     alert('You payment is successfull');
+
+    const currentDate = new Date();
+
+    // Get individual date components
+    const day = currentDate.getDate();
+    const month = currentDate.getMonth() + 1; // Note: Months are zero-based, so we add 1
+    const year = currentDate.getFullYear();
+
+    // Format the date as 'MM/DD/YYYY'
+    const formattedDate = `${month}/${day}/${year}`;
+
+     try{
+  await addDoc(collectionRef, {
+    customerId : userData?.userData?.uid , 
+    items: products.length,
+   
+    pricePurchase: totalAmount,
+    customer: userData?.userData?.displayName,
+    createdAt: formattedDate,
+  });
+    }catch(error) {
+toast.error(error.message)
+console.log(error.message)
+    }
   };
 
   return (
@@ -139,7 +190,9 @@ useMemo(() => {
               shippingAddress
               billingAddress={false}
             >
-              <button className=" flex items-center justify-center gap-5 w-full bg-black text-white py-3 px-4 rounded-[62px] font-satoshi-md">
+              <button
+             
+              className=" flex items-center justify-center gap-5 w-full bg-black text-white py-3 px-4 rounded-[62px] font-satoshi-md">
                 Go to Checkout <BsArrowRight />
               </button>
             </StripeCheckout>

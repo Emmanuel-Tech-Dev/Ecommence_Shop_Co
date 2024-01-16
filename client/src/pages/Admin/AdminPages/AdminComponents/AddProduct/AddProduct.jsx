@@ -6,15 +6,15 @@ import { database, storage } from '../../../../../firebase/config';
 import { toast } from 'react-toastify';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
- const [data, setData] = useState({
-   productName: '',
-   regPrice: '',
-   stockPrice: '',
-   proDescription: '',
- });
+  const [data, setData] = useState({
+    productName: '',
+    regPrice: '',
+    stockPrice: '',
+    proDescription: '',
+  });
   const [file, setFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null); // State to store image preview URL
   const [submit, setSubmit] = useState(false);
@@ -37,10 +37,10 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
         setImagePreview(null);
       }
     } else {
-       setData((prevData) => ({
-         ...prevData,
-         [e.target.name]: e.target.value,
-       }));
+      setData((prevData) => ({
+        ...prevData,
+        [e.target.name]: e.target.value,
+      }));
     }
   };
 
@@ -68,39 +68,33 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
       });
 
       toast.success('Product added successfully!');
-     
     } catch (error) {
       toast.error(error.message);
     } finally {
       setSubmit(false);
       setFile(null); // Clear the file state after submission
       setImagePreview(null); // Clear the image preview
-     setIsAddSlide(false) // set slide to false
-       setData({
-         productName: '',
-         regPrice: '',
-         stockPrice: '',
-         proDescription: '',
-       });
-  
+      setIsAddSlide(false); // set slide to false
+      setData({
+        productName: '',
+        regPrice: '',
+        stockPrice: '',
+        proDescription: '',
+      });
     }
-    
   };
 
-
   const handleCloseAdd = () => {
-    setIsAddSlide(false)
+    setIsAddSlide(false);
     setData({
       productName: '',
       regPrice: '',
       stockPrice: '',
       proDescription: '',
     });
-    setFile(null)
-    setImagePreview(null)
-
-  }
-
+    setFile(null);
+    setImagePreview(null);
+  };
 
   return (
     <div
@@ -169,7 +163,27 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
               className="border border-blue-400 w-full rounded py-2 indent-2"
             />
           </div>
+          <div className="space-y-1.5 mt-3">
+            <label htmlFor="cat" className="font-satoshi  text-[14px]">
+              Category - Brand
+            </label>
+            <br />
           
+          
+            <select
+              id="cat"
+              name='cat'
+              className="border border-blue-400 w-full rounded py-2 "
+            >
+
+              
+              <option value="Versache">Versache</option>
+              <option value="Gucci">Gucci</option>
+              <option value="Luis Vitton">Luis Vitton</option>
+              <option value="Ordinary">Ordinary</option>
+            </select>
+          </div>
+
           <div className="space-y-1.5 mt-5">
             <textarea
               type="text"
@@ -214,10 +228,9 @@ const AddProduct = ({ isAddSlide, setIsAddSlide }) => {
   );
 };
 
- AddProduct.propTypes = {
+AddProduct.propTypes = {
   isAddSlide: PropTypes.bool.isRequired,
   setIsAddSlide: PropTypes.func.isRequired,
 };
-
 
 export default AddProduct;

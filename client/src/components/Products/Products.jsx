@@ -6,12 +6,15 @@ import 'slick-carousel/slick/slick-theme.css';
 import PropTypes from 'prop-types'
 
 import useFetchAllData from '../../GeneraFetch';
-
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { useContext } from 'react';
+import { UserContext } from '../../UserContext';
 
 const Product = ({title}) => {
   const data = useFetchAllData('products')
+ const isLoading = useContext(UserContext)
 
-console.log(data)
 
  const filterProducts = data
    .slice()
@@ -22,6 +25,9 @@ console.log(data)
   //    (a, b) =>
   //      new Date() - new Date)
   //  );
+
+
+
 
     const settings = {
       className: 'center',
@@ -71,11 +77,15 @@ console.log(data)
       </h1>
       <Slider {...settings}>
         {filterProducts.map((item) => (
-          <Card key={item.id} item={item} />
+          <div key={item?.id || 'skeleton'}>
+            {isLoading == true ? (
+              <Skeleton width={200} height={300} />
+            ) : (
+              <Card key={item.id} item={item} />
+            )}
+          </div>
         ))}
       </Slider>
-
-     
     </div>
   );
 }

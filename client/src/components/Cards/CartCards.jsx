@@ -85,7 +85,7 @@ const CartCards = ({item , totalAmount , setTotalAmount}) => {
 
 CartCards.propTypes = {
   item: PropTypes.object.isRequired,
-  totalAmount: PropTypes.number.isRequired,
+  totalAmount: PropTypes.string.isRequired,
   setTotalAmount: PropTypes.func.isRequired
 }
 
