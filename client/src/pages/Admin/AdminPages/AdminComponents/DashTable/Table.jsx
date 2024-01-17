@@ -37,7 +37,7 @@ const Table = () => {
                 </div>
               </div>
             </td>
-            <td className="text-[14px]">20/11/2023</td>
+            <td className="text-[14px]">{item.createdAt}</td>
             <td className="text-[14px]">
               <span className="font-satoshi-md text-black">{item.pricePurchase}</span> USD
             </td>

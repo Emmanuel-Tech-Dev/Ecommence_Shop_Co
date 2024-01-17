@@ -9,6 +9,7 @@ const Traffic = () => {
 
 
  const products = useFetchAllData('products')
+ const orders = useFetchAllData('orders')
 
   const filterProducts = products.slice().reverse().slice(0, 5);
    
@@ -49,12 +50,12 @@ const Traffic = () => {
             <div className="font-satoshi">
               <div>
                 <span className="text-[#788791] text-[14px]">Orders</span>
-                <h4 className="font-satoshi-bold text-[20px]">200</h4>
+                <h4 className="font-satoshi-bold text-[20px]">{orders.length}</h4>
               </div>
             </div>
 
-            <div className="bg-blue-50 p-3 rounded">
-              <GoPeople size={24} className="text-blue-500" />
+            <div className="bg-green-50 p-3 rounded">
+              <FiShoppingBag size={24} className="text-green-500" />
             </div>
           </div>
         </div>
@@ -67,10 +68,10 @@ const Traffic = () => {
                 <h4 className="font-satoshi-bold text-[20px]">200</h4>
               </div>
             </div>
-
-            <div className="bg-green-50 p-3 rounded">
-              <FiShoppingBag size={24} className="text-green-500" />
+ <div className="bg-blue-50 p-3 rounded">
+              <GoPeople size={24} className="text-blue-500" />
             </div>
+           
           </div>
         </div>
 
